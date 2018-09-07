@@ -1,0 +1,60 @@
+.tabletbody td,
+.table thead>tr>th {
+    border-bottom-width: 1px;
+    text-align: center
+}
+
+.item-brdr {
+    padding: 10px;
+    box-shadow: 0 0px 5px 0 rgba(0, 0, 0, .16), 0 2px 5px 0 rgba(0, 0, 0, .12);
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #747d98;
+    transition: all 0.1s;
+}
+
+.item-brdr:hover {
+    background-color: #e1e7ec;
+}
+
+.mt-0 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.item-brdr p {
+    color: #747d98;
+}
+
+.add-to-cart i {
+    font-size: 14px;
+    vertical-align: -2px;
+    cursor: pointer;
+}
+
+.mrgn-lft {
+    margin-left: 25px;
+}
+
+.item-brdr ul,
+.mrgn-btm {
+    margin-bottom: 0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.mrgn-btm a i {
+    color: #747d89;
+    font-weight: normal !important;
+}
+
+.item-brdr ul li {
+    color: #747d98;
+    border: 1px solid #ddd;
+}
+
+.item-brdr ul li:hover {
+    color: #fff;
+    background-color: #ec8558;
+    border-color: #ec8558;
+}

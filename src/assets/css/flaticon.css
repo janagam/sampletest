@@ -1,0 +1,204 @@
+@font-face {
+    font-family: Flaticon;
+    src: url(/assets/fonts/Flaticon.eot);
+    src: url(/assets/fonts/Flaticon.eot?#iefix) format("embedded-opentype"), url(Flaticon.woff) format("woff"), url(/assets/fonts/Flaticon.ttf) format("truetype"), url(Flaticon.svg#Flaticon) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family: Flaticon;
+        src: url(Flaticon.svg#Flaticon) format("svg")
+    }
+}
+
+[class*=" flaticon-"]:after,
+[class*=" flaticon-"]:before,
+[class^=flaticon-]:after,
+[class^=flaticon-]:before {
+    font-family: Flaticon;
+    font-size: 20px;
+    font-style: normal;
+    margin-left: 0;
+    margin-top: 4px
+}
+
+#cssmenu li a:hover [class*=" flaticon-"]:after,
+#cssmenu li a:hover [class*=" flaticon-"]:before,
+#cssmenu li a:hover [class^=flaticon-]:after,
+#cssmenu li a:hover [class^=flaticon-]:before {
+    color: red
+}
+
+.left-menu-img {
+    margin-top: 4px
+}
+
+.flaticon-black:before {
+    content: "\f100"
+}
+
+.flaticon-circle:before {
+    content: "\f101"
+}
+
+.flaticon-cross:before {
+    content: "\f102"
+}
+
+.flaticon-cross-1:before {
+    content: "\f103"
+}
+
+.flaticon-food:before {
+    content: "\f104"
+}
+
+.flaticon-health:before {
+    content: "\f105"
+}
+
+.flaticon-human:before {
+    content: "\f106"
+}
+
+.flaticon-interface:before {
+    content: "\f107"
+}
+
+.flaticon-man:before {
+    content: "\f108"
+}
+
+.flaticon-medical:before {
+    content: "\f109"
+}
+
+.flaticon-medical-1:before {
+    content: "\f10a"
+}
+
+.flaticon-medical-10:before {
+    content: "\f10b"
+}
+
+.flaticon-medical-11:before {
+    content: "\f10c"
+}
+
+.flaticon-medical-12:before {
+    content: "\f10d"
+}
+
+.flaticon-medical-13:before {
+    content: "\f10e"
+}
+
+.flaticon-medical-14:before {
+    content: "\f10f"
+}
+
+.flaticon-medical-15:before {
+    content: "\f110"
+}
+
+.flaticon-medical-16:before {
+    content: "\f111"
+}
+
+.flaticon-medical-17:before {
+    content: "\f112"
+}
+
+.flaticon-medical-18:before {
+    content: "\f113"
+}
+
+.flaticon-medical-19:before {
+    content: "\f114"
+}
+
+.flaticon-medical-2:before {
+    content: "\f115"
+}
+
+.flaticon-medical-20:before {
+    content: "\f116"
+}
+
+.flaticon-medical-21:before {
+    content: "\f117"
+}
+
+.flaticon-medical-22:before {
+    content: "\f118"
+}
+
+.flaticon-medical-3:before {
+    content: "\f119"
+}
+
+.flaticon-medical-4:before {
+    content: "\f11a"
+}
+
+.flaticon-medical-5:before {
+    content: "\f11b"
+}
+
+.flaticon-medical-6:before {
+    content: "\f11c"
+}
+
+.flaticon-medical-7:before {
+    content: "\f11d"
+}
+
+.flaticon-medical-8:before {
+    content: "\f11e"
+}
+
+.flaticon-medical-9:before {
+    content: "\f11f"
+}
+
+.flaticon-nature:before {
+    content: "\f120"
+}
+
+.flaticon-people:before {
+    content: "\f121"
+}
+
+.flaticon-people-1:before {
+    content: "\f122"
+}
+
+.flaticon-person:before {
+    content: "\f123"
+}
+
+.flaticon-person-1:before {
+    content: "\f124"
+}
+
+.flaticon-person-2:before {
+    content: "\f125"
+}
+
+.flaticon-shape:before {
+    content: "\f126"
+}
+
+.flaticon-symbol:before {
+    content: "\f127"
+}
+
+.flaticon-tool:before {
+    content: "\f128"
+}
+
+.flaticon-tool-1:before {
+    content: "\f129"
+}

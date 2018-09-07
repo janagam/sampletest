@@ -1,0 +1,54 @@
+.fa-facebook-square,
+.fa-google-plus-square,
+.fa-twitter-square {
+    color: #ddd;
+    transition: ease-in-out .5s;
+}
+
+.footer-info {
+    font-size: 13px;
+}
+
+.fa-facebook-square:hover {
+    color: #3b5998;
+}
+
+.fa-google-plus-square:hover {
+    color: #db4437;
+}
+
+.fa-twitter-square:hover {
+    color: #1da1f2;
+}
+
+.footer-info h3 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.back-to-top {
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    z-index: 101;
+    background-color: #f67f57;
+    border-color: #f67f57;
+}
+
+.footer-links .list li a {
+    color: #747d89;
+    font-size: 13px;
+    transition: all .5s;
+}
+
+.footer-links .list li a:hover {
+    color: #f67f57;
+}
+
+.footer-links .list li a:hover::before {
+    content: "\f101";
+    font-family: FontAwesome;
+    padding-right: 5px;
+}

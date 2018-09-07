@@ -1,0 +1,57 @@
+<div class="container pad-top login">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 main">
+
+            <div class="col-md-6 col-sm-6  hidden-xs left-side">
+                <h3 class="text-center">Genericwala.com</h3>
+                <p>Generiwala.com is an online pharmacy, </p>
+                <p>we provide you quality generic medicines that are
+                    <p>produced by reputed Companies at affordable price.</p>
+                    <h4 class="text-center">Login With</h4>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary btn-fb" (click)='signInWithFB()'>
+                            <span>
+                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            </span>Facebook</button>
+                        <button type="button" class="btn btn-danger btn-ggl" (click)='signInWithGoogle()'>
+                            <span>
+                                <i class="fa fa-google-plus" aria-hidden="true"></i>
+                            </span>Google</button>
+                    </div>
+            </div>
+            <div class="col-md-6 col-sm-6 right-side">
+
+                <div *ngIf="isLoginError" class="alert alert-danger">
+                    <p>invalid username and password</p>
+                </div>
+                <form #loginForm="ngForm" class="" (ngSubmit)="submitForm(loginForm)">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Username" [(ngModel)]="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" id="password" [(ngModel)]="password" placeholder="Password" required>
+                    </div>
+
+                    <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="!loginForm.form.valid" (onclick)="LoginMe()">Login</button>
+                        <button type="button" class="btn btn-warning btn-bk" routerLink="/Signup/Signup">
+                            Sign Up
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center col-xs-12 hidden-md hidden-lg hidden-sm">
+                <h4 class="text-center">Login With</h4>
+                <button type="button" class="btn btn-primary btn-fb" (click)='signInWithFB()'>
+                                <span>
+                                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                                </span>Facebook</button>
+                <button type="button" class="btn btn-danger btn-ggl" (click)='signInWithGoogle()'>
+                                <span>
+                                    <i class="fa fa-google-plus" aria-hidden="true"></i>
+                                </span>Google</button>
+            </div>
+        </div>
+    </div>
+</div>

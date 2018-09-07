@@ -1,0 +1,36 @@
+<div id="sidebar-wrapper">
+    <ul class=" list-unstyled sidebar-nav">
+        <h3 class="text-center">Shop by Categories</h3>
+        <p class="status-msg">{{statusMesssage}}</p>
+        <li class="dropdown active" *ngFor="let item of category_List;let i=index" id='{{selectedIndex}}' (click)="Toggle(i)" [class.active]="i === selectedIndex">
+            <!-- <a title="{{item.name}} " class="dropdown-toggle " data-toggle="dropdown " role="button " aria-haspopup="true " aria-expanded="false " aria-controls="collapse-one " (click)="GetCategoryProducts(item.name,item.id) "> -->
+            <a title="{{item.name}}" class="dropdown-toggle" data-toggle="dropdown" role="button " aria-haspopup="true" aria-expanded="false " aria-controls="collapse-one">
+
+               {{item.name}}
+            </a>
+            <ul class="dropdown-menu" id="collapse-one">
+                <li class="subcatories" *ngFor="let subcat of item.subCategoryVm;">
+                    <a title="{{subcat.name}}" (click)="GetSubCategoryProducts(subcat.name,subcat.id,item.name,item.id)">{{subcat.name}}</a>
+                </li>
+            </ul>
+
+        </li>
+
+        <li>
+            <a routerLink="/Home/DlofDay">
+Offers
+        </a>
+        </li>
+        <li>
+            <a routerLink="/Home/AllGenericMed">
+Generic Medicines
+        </a>
+        </li>
+
+        <li>
+            <a href="#menu-toggle" id="menu-toggle" title="menu" class="btn btn-default back-btn text-center">
+              Close
+            </a>
+        </li>
+    </ul>
+</div>

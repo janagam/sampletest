@@ -1,0 +1,269 @@
+<div class="container pad-top">
+    <div class="row">
+            <simple-notifications></simple-notifications>
+        <div class="col-lg-4 col-md-5 col-sm-6" *ngIf="Productdetials.ItemDetails !== null">
+            <div class="thumbnail thmbnl-height" *ngIf="Productdetials.ItemDetails.Image !== null && Productdetials.ItemDetails.Image !== ''  && itemType === 1">
+                <div class="div-brdr">
+                    <img src="http://stores.genericwala.com/Uploads/ProductImages/{{Productdetials.ItemDetails.Image}}" class="img-responsive img-fluid center-block">
+                </div>
+            </div>
+            <div class="thumbnail thmbnl-height" *ngIf="Productdetials.ItemDetails.Image !== null && Productdetials.ItemDetails.Image !== ''  && itemType === 0">
+                <div class="div-brdr">
+                    <img src="http://stores.genericwala.com/Uploads/drugImageUploads/{{Productdetials.ItemDetails.Image}}" class="img-responsive img-fluid center-block">
+                </div>
+            </div>
+            <div class="thumbnail thmbnl-height" *ngIf="Productdetials.ItemDetails.Image ===  null || Productdetials.ItemDetails.Image === '' ">
+                <div class="div-brdr">
+                    <a href="">
+                        <img src="http://placehold.it/320x200" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <button class="btn btn-primary btn-sbmt text-right" (click)="AddtoCart(Productdetials.ItemDetails,quantity)">Add to Cart</button>
+                    <button class="btn btn-warning btn-bk" (click)="AddtoWhishlist(Productdetials.ItemDetails,quantity)">Add to Wishlist</button>
+                    <button class="btn btn-success" routerLink="/Cart/Cart">Buy Now</button>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-8 col-md-7 col-sm-6 cstm-thumbnail  clearfix">
+            <h4 class="">{{Productdetials.ItemDetails.Name}}</h4>
+            <p>Sold By {{Productdetials.ItemDetails.CompanyBrand}}</p>
+            <ul class="list-inline list-unstyled v-align">
+                <li>
+                    <a>
+                        <i class="material-icons">star_border</i>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="material-icons">star_border</i>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="material-icons">star_border</i>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="material-icons">star_border</i>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <i class="material-icons">star_border</i>
+                    </a>
+                </li>
+                <li>
+                    <a>Based on 0 Rating</a>
+                </li>
+                <li class="">
+
+                    <button type="button" class="btn btn-success mrgn-top-xs">Write Review</button>
+                </li>
+            </ul>
+
+            <ul class="list-inline">
+                <li>
+                    <h5 class="text-left">Rs {{Productdetials.ItemDetails.TotalPrice | number:'1.0-2' }}</h5>
+                </li>
+                <li>
+                    <h5>
+                        <s>Rs {{Productdetials.ItemDetails.Price | number:'1.0-2' }}</s>
+                    </h5>
+                </li>
+                <li>
+                    <a class="btn btn-warning btn-bk">{{Productdetials.ItemDetails.DiscountInPercent | number:'1.0-2' }}% off</a>
+                </li>
+            </ul>
+            <h5>You Save : Rs {{Productdetials.ItemDetails.TotalDiscount | number:'1.0-2'}}</h5>
+            <hr/>
+            <input type="hidden" name="kraj-dokument" id="kraj-dokument" value="{{ Productdetials.ItemDetails.Price  }}" />
+
+            <h5>Quantity</h5>
+            <div class="btn-group">
+                <span class="btn btn-primary gw-add-btn" (click)="DecreaseProductQuantity(Productdetials.ItemDetails)">-</span>
+                <span class="btn btn-primary gw-add-btn">{{quantity}}</span>
+                <span class="btn btn-primary gw-add-btn" (click)="IncreaseProductQuantity(Productdetials.ItemDetails,Productdetials.ItemDetails.Code)">+</span>
+            </div>
+            <p class="text-right text-danger" style="margin-top: 20px;">
+                <small>* Prices are subjected to change and will be reconfirmed prior to processing your order. </small>
+            </p>
+
+            <!-- <div class="pull-right">
+                <button class="btn btn-primary btn-sbmt text-right mrgn-top-xs" (click)="AddtoCart(Productdetials.ItemDetails,quantity)">Add to Cart</button>
+                <button class="btn btn-warning btn-bk mrgn-top-xs" (click)="AddtoWhishlist(Productdetials.ItemDetails,quantity)">Add to Wishlist</button>
+                <button class="btn btn-success mrgn-top-xs">Buy Now</button>
+            </div> -->
+
+
+        </div>
+
+        <div class="col-md-12">
+
+            <div *ngIf="Productdetials.ItemDetails.Type">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#sectionF">Description</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionG">Information</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionH"> Review</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionI">Extra Information</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionJ">Guarantees</a>
+                    </li>
+                </ul>
+                <div class="tab-content" *ngIf="Productdetials.ItemDetails.Type === 1">
+                    <div id="sectionF" class="tab-pane fade in active">
+                        <p>
+                            {{Productdetials.prodInfo.productDescription}}
+                        </p>
+                    </div>
+                    <div id="sectionG" class="tab-pane fade">
+
+                        <p *ngIf='Productdetials.prodInfo.Composition !== null'>
+                            <span>Composition</span>
+                            <br> {{Productdetials.prodInfo.Composition}}
+                        </p>
+                        <p *ngIf='Productdetials.prodInfo.Composition==null'>
+                            <span>Composition</span>
+                            <br> No Compostion
+                        </p>
+
+                        <p *ngIf='Productdetials.prodInfo.OtherInformation !== null'>
+                            <span>OtherInformation</span>
+                            <br> {{Productdetials.prodInfo.OtherInformation}}
+                        </p>
+                        <p *ngIf='Productdetials.prodInfo.OtherInformation==null'>
+                            <span>OtherInformation</span>
+                            <br> No OtherInformation
+                        </p>
+                    </div>
+                    <div id="sectionH" class="tab-pane fade">
+
+                        <br> No Review
+
+                    </div>
+                    <div id="sectionI" class="tab-pane fade">
+                        No Information
+                    </div>
+                    <div id="sectionJ" class="tab-pane fade">
+                        No Information
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="!Productdetials.ItemDetails.Type">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-toggle="tab" href="#sectionA">Description</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionB">Composition</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionC"> Mechanism</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionD">Metabolism</a>
+                    </li>
+                    <li>
+                        <a data-toggle="tab" href="#sectionE">Side Effects</a>
+                    </li>
+                </ul>
+
+                <!-- druggs -->
+                <div class="tab-content" *ngIf="Productdetials.ItemDetails.Type === 0">
+                    <div id="sectionA" class="tab-pane fade in active">
+
+                        <p *ngIf='Productdetials.drugSpecification.Description'>
+                            <span>Description</span>
+                            <br> {{Productdetials.drugSpecification.Description}}
+                        </p>
+                        <p *ngIf='Productdetials.drugSpecification.Categories'>
+                            <span>Categories</span>
+                            <br> {{Productdetials.drugSpecification.Categories}}
+                        </p>
+                        <p *ngIf='Productdetials.drugSpecification.Chemical_Formula'>
+                            <span>Chemical_Formula</span>
+                            <br> {{Productdetials.drugSpecification.Chemical_Formula}}
+                        </p>
+                    </div>
+                    <div id="sectionB" class="tab-pane fade">
+                        <p *ngIf='Productdetials.drugSpecification.Composition'>
+                            <span>Composition</span>
+                            <br/> {{Productdetials.drugSpecification.Composition}}
+                        </p>
+
+                        <p *ngIf='Productdetials.drugSpecification.Indication'>
+                            <span>Indication</span>
+                            <br/> {{Productdetials.drugSpecification.Indication}}
+                        </p>
+                        <p *ngIf='Productdetials.drugSpecification.Pharmacodynamics'>
+                            <span>Pharmacodynamics</span>
+                            <br/> {{Productdetials.drugSpecification.Pharmacodynamics}}
+                        </p>
+                    </div>
+
+                    <div id="sectionC" class="tab-pane fade">
+                        <p *ngIf='Productdetials.drugSpecification.Mechanism'>
+                            <span>Mechanism</span>
+                            <br/> {{Productdetials.drugSpecification.Mechanism}}
+                        </p>
+
+                        <p *ngIf='Productdetials.drugSpecification.Absorption'>
+                            <span>Absorption</span>
+                            <br/> {{Productdetials.drugSpecification.Absorption}}
+                        </p>
+                        <p *ngIf='Productdetials.drugSpecification.Volume_Distribution'>
+                            <span>Volume_Distribution</span>
+                            <br/> {{Productdetials.drugSpecification.Volume_Distribution}}
+                        </p>
+                    </div>
+                    <div id="sectionD" class="tab-pane fade">
+                        <p *ngIf='Productdetials.drugSpecification.Metabolism'>
+                            <span>Metabolism</span>
+                            <br/> {{Productdetials.drugSpecification.Metabolism}}
+                        </p>
+
+                        <p *ngIf='Productdetials.drugSpecification.Half_Life'>
+                            <span>Half_Life</span>
+                            <br/> {{Productdetials.drugSpecification.Half_Life}}
+                        </p>
+                    </div>
+                    <div id="sectionE" class="tab-pane fade">
+
+                        <p *ngIf='Productdetials.drugSpecification.Toxicity'>
+                            <span>Toxicity</span>
+                            <br/> {{Productdetials.drugSpecification.Toxicity}}
+                        </p>
+
+                        <p *ngIf='Productdetials.drugSpecification.Food_Interactions'>
+                            <span>Food_Interactions</span>
+                            <br/> {{Productdetials.drugSpecification.Food_Interactions}}
+                        </p>
+
+                        <p *ngIf='Productdetials.drugSpecification.SideEffects'>
+                            <span>SideEffects</span>
+                            <br/> {{Productdetials.drugSpecification.SideEffects}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

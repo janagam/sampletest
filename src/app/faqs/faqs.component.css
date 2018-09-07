@@ -1,0 +1,22 @@
+.panel-title a {
+    font-weight: normal;
+}
+
+.panel-title>a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content: "\f106";
+    padding-right: 5px;
+}
+
+.panel-title>a.collapsed:before {
+    font-family: FontAwesome;
+    float: right !important;
+    content: "\f107";
+}
+
+.panel-title>a:hover,
+.panel-title>a:active,
+.panel-title>a:focus {
+    text-decoration: none;
+}

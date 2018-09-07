@@ -1,0 +1,676 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row" *ngIf="this.status === false">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a routerLink="/categoryProducts.categoryName">{{categoryProducts.categoryName}}</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/categoryProducts.subCategoryName">{{categoryProducts.subCategoryName}} </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row" *ngIf="this.status === true">
+            <div class="col-md-12">
+                <ol class="breadcrumb  pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/categoryProducts.categoryName">{{categoryProducts.categoryName}}</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- <div class="container" *ngIf="this.status === false" >
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h3>{{categoryProducts.subCategoryName}} </h3>
+            <table class="table table-bordered text-center">
+                <thead class="text-center">
+                    <tr>
+                        <th>Brand</th>
+                        <th>MRP</th>
+                        <th>Our Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr   *ngFor="let item of categoryProducts.Drugs" >
+                        <td>
+                            <p><a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+                                   
+                               <span *ngIf="item.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span> 
+                               <span *ngIf="item.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> 
+                               
+
+                                {{item.ItemName}}
+                                 <span><small> - {{item.Manufacturer}}</small></span></a></p>
+                           
+                           
+                                <p>{{item.Composition}}</p>
+                         
+                        </td>
+                        <td>
+                            <h5><i class="fa fa-inr"></i>{{item.MRP | number : '1.2-2' }}</h5>
+                        </td>
+                        <td>
+                            <h5><i class="fa fa-inr"></i>{{item.SellingPrice | number : '1.2-2'}}</h5>
+                        </td>
+                        <td>
+                            <h5>
+                                <a (click)="AddtoDrugCart(item)" ><i class="material-icons add-to-cart">shopping_cart</i></a>
+                            </h5>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null" >Products</h3> 
+            <table class="table table-bordered text-center" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">
+                
+                <thead class="text-center">
+                        <tr>
+                            <th>Brand</th>
+                            <th>MRP</th>
+                            <th>Our Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr   *ngFor="let item of categoryProducts.Products" >
+                            <td>
+                                <p><a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)">
+                                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span> 
+                                        <span *ngIf="item.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> 
+               
+                                    {{item.Name}} {{item.model}} <span><small> - {{item.Name}}</small></span></a></p>
+                                <p>{{item.Description}}</p>
+                             
+                            </td>
+                            <td>
+                                <h5><i class="fa fa-inr"></i>{{item.MSRP | number : '1.2-2' }}</h5>
+                            </td>
+                            <td>
+                                <h5><i class="fa fa-inr"></i>{{item.SellingPrice | number : '1.2-2'}}</h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <a (click)="AddProductToCart(item)"><i class="material-icons add-to-cart">shopping_cart</i></a>
+                                </h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            
+        </div>
+    </div>
+</div> -->
+
+        <!-- All category Products -->
+        <!-- <div class="container" *ngIf="this.status === true" >
+        <div class="row" *ngFor="let item of categoryProducts.SubCategoryDrugs.subCategoryDrugsList">
+            <div class="col-md-12 col-xs-12">
+                <h3>{{item.subCatName}} </h3>
+                <table class="table table-bordered text-center">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Brand</th>
+                            <th>MRP</th>
+                            <th>Our Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let drug_list of item.Drugs" >
+                            <td>
+                                <p><a (click)="ProductDetails(drug_list.ItemCode,drug_list.ItemType,drug_list.ItemName)">
+                       
+
+                                    <span *ngIf="drug_list.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span> 
+                                    <span *ngIf="drug_list.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> 
+                                    
+                                    
+                                    {{drug_list.ItemName}} <span><small> - {{drug_list.Manufacturer}}</small></span></a></p>
+                                <p>{{drug_list.Composition}}</p>
+                             
+                            </td>
+                            <td>
+                                <h5><i class="fa fa-inr"></i>{{drug_list.MRP | number : '1.2-2' }}</h5>
+                            </td>
+                            <td>
+                                <h5><i class="fa fa-inr"></i>{{drug_list.SellingPrice | number : '1.2-2'}}</h5>
+                            </td>
+                            <td>
+                                <h5><a (click)="AddtoDrugCart(drug_list)"><i class="material-icons add-to-cart">shopping_cart</i></a></h5>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+             
+            </div>
+        </div>
+        <h3 *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null" >Products</h3> 
+        <table class="table table-bordered text-center" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">                 
+            <thead class="text-center">
+                    <tr>
+                        <th>Brand</th>
+                        <th>MRP</th>
+                        <th>Our Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr   *ngFor="let item of categoryProducts.Products" >
+                        <td>
+                            <p><a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)"><i class="flaticon-medical-16"></i>{{item.Name}} {{item.model}} <span><small> - {{item.Name}}</small></span></a></p>
+                            <p>{{item.Description}}</p>
+                         
+                        </td>
+                        <td>
+                            <h5><i class="fa fa-inr"></i>{{item.MSRP | number : '1.2-2' }}</h5>
+                        </td>
+                        <td>
+                            <h5><i class="fa fa-inr"></i>{{item.SellingPrice | number : '1.2-2'}}</h5>
+                        </td>
+                        <td>
+                            <h5><a (click)="AddProductToCart(item)"><i class="material-icons  add-to-cart">shopping_cart</i></a></h5>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div> -->
+        <!-- end -->
+
+        <!-- <div class="container" *ngIf="this.status === false">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h4 class="mt-0">{{categoryProducts.subCategoryName}} </h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" *ngFor="let item of categoryProducts.Drugs">
+            <div class="item-brdr">
+
+
+                <p class="mrgn-btm">
+                    <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+
+                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> {{item.ItemName}}
+                        <span><small> - {{item.Manufacturer}}</small></span></a>
+                </p>
+
+                <p class="mrgn-lft">
+                    <small>{{item.Composition}}</small>
+                </p>
+                <ul class="list-inline list-unstyled text-right">
+                    <li>
+                        <span>MRP:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.MRP | number : '1.2-2' }}</span>
+                    </li>
+                    <li>
+                        <span>Our Price:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                    </li>
+                    <li>
+                        <a (click)="AddtoDrugCart(item)"> <span class="add-to-cart"><i class="material-icons add-to-cart">shopping_cart</i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <h4 class="mt-0" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">Products</h4>
+
+    <div class="row">
+        <div class="col-md-6" *ngFor="let item of categoryProducts.Products">
+            <div class="item-brdr">
+
+                <p class="mrgn-btm">
+                    <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)">
+
+                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> {{item.Name}} <span *ngIf="item.model !== null">- {{item.model}}</span>
+                        <span><small> - {{item.VendorName}}</small></span></a>
+                </p>
+
+                <p class="mrgn-lft">
+                    <small>{{item.Name}}</small>
+                </p>
+                <ul class="list-inline list-unstyled text-right">
+                    <li>
+                        <span>MRP:
+                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.MSRP | number : '1.2-2' }}</span>
+                    </li>
+                    <li>
+                        <span>Our Price:
+                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                    </li>
+                    <li>
+                        <a (click)="AddProductToCart(item)"><span class="add-to-cart"><i class="material-icons add-to-cart">shopping_cart</i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+        <!-- All category Products -->
+        <!-- <div class="container" *ngIf="this.status === true">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h4 class="mt-0">{{item.subCatName}} </h4>
+        </div>
+    </div>
+    <div class="row" *ngFor="let item of categoryProducts.SubCategoryDrugs.subCategoryDrugsList">
+        <div class="col-md-12">
+            <h4 class="mt-0">{{item.subCatName}} </h4>
+        </div>
+        <div class="col-md-6" *ngFor="let drug_list of item.Drugs">
+            <div class="item-brdr">
+
+                <p class="mrgn-btm">
+                    <a (click)="ProductDetails(drug_list.ItemCode,drug_list.ItemType,drug_list.ItemName)">
+
+                        <span *ngIf="drug_list.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="drug_list.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> {{drug_list.ItemName}}
+                        <span><small> - {{drug_list.Manufacturer}}</small></span></a>
+                </p>
+
+                <p class="mrgn-lft">
+                    <small>{{drug_list.Composition}}</small>
+                </p>
+                <ul class="list-inline list-unstyled text-right">
+                    <li>
+                        <span>MRP:
+                                <i aria-hidden="true" class="fa fa-inr"></i> {{drug_list.MRP | number : '1.2-2' }}</span>
+                    </li>
+                    <li>
+                        <span>Our Price:
+                                <i aria-hidden="true" class="fa fa-inr"></i> {{drug_list.SellingPrice | number : '1.2-2'}}</span>
+                    </li>
+                    <li>
+                        <a (click)="AddtoDrugCart(drug_list)"> <span class="add-to-cart"><i class="material-icons add-to-cart">shopping_cart</i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h4 class="mt-0" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">Products</h4>
+    <div class="row">
+        <div class="col-md-6" *ngFor="let item of categoryProducts.Products">
+            <div class="item-brdr">
+
+                <p class="mrgn-btm">
+                    <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)">
+
+                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'"><i class="flaticon-medical-16"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'"><i class="flaticon-medical-9"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'strip'"><i class="flaticon-medical-11"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'tube'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'"><i class="flaticon-tube-icon"></i></span>
+                        <span *ngIf="item.PurchaseUnitModel == 'INJ'"><i class="flaticon-medical-8"></i></span> {{item.Name}} <span *ngIf="item.model !== null">- {{item.model}}</span>
+                        <span><small> - {{item.VendorName}}</small></span></a>
+                </p>
+
+                <p class="mrgn-lft">
+                    <small>{{item.Name}}</small>
+                </p>
+                <ul class="list-inline list-unstyled text-right">
+                    <li>
+                        <span>MRP:
+                                    <i aria-hidden="true" class="fa fa-inr"></i> {{item.MSRP | number : '1.2-2' }}</span>
+                    </li>
+                    <li>
+                        <span>Our Price:
+                                    <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                    </li>
+                    <li>
+                        <a (click)="AddProductToCart(item)"><span class="add-to-cart"><i class="material-icons add-to-cart">shopping_cart</i></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+        <!--Tab system product-->
+
+        <div class="row">
+            <div class="col-md-12" style="padding-left: 0;">
+
+                <ul class="list-unstyled list-inline">
+                    <li class="active">
+                        <a class="btn btn-warning btn-bk" data-toggle="tab" href="#Drugs">Drugs</a>
+                    </li>
+                    <li class="">
+                        <a class="btn btn-primary btn-sbmt" data-toggle="tab" href="#Products">Products</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <simple-notifications></simple-notifications>
+                <div id="Drugs" class="tab-pane active col-md-12">
+                    <div class="row" *ngIf="this.status === true">
+
+                        <div class="row" *ngFor="let item of categoryProducts.SubCategoryDrugs.subCategoryDrugsList">
+                            <h4 class="text-center">Drugs</h4>
+                            <div class="col-md-12">
+                                <h4 class="mt-0">{{item.subCatName}} </h4>
+                            </div>
+                            <div class="col-md-6" *ngFor="let drug_list of item.Drugs">
+                                <div class="item-brdr">
+                                    <p class="mrgn-btm">
+                                        <a (click)="ProductDetails(drug_list.ItemCode,drug_list.ItemType,drug_list.ItemName)">
+
+                                            <span *ngIf="drug_list.PurchaseUnitModel === 'STRIP'">
+                                                    <i class="flaticon-medical-11"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel === 'SYRUP'">
+                                                    <i class="flaticon-medical-9"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'BOTTLE'">
+                                                    <i class="flaticon-medical-16"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'Tablet'">
+                                                    <i class="flaticon-medical-9"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'strip'">
+                                                    <i class="flaticon-medical-11"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'tube'">
+                                                    <i class="flaticon-tube-icon"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'TUBE'">
+                                                    <i class="flaticon-tube-icon"></i>
+                                                </span>
+                                            <span *ngIf="drug_list.PurchaseUnitModel == 'INJ'">
+                                                    <i class="flaticon-medical-8"></i>
+                                                </span> {{drug_list.ItemName}}
+                                            <span>
+                                                    <small> - {{drug_list.Manufacturer}}</small>
+                                                </span>
+                                        </a>
+                                    </p>
+
+                                    <p class="mrgn-lft">
+                                        <small>{{drug_list.Composition}}</small>
+                                    </p>
+                                    <ul class="list-inline list-unstyled text-right">
+                                        <li>
+                                            <span>MRP:
+                                                    <i aria-hidden="true" class="fa fa-inr"></i> {{drug_list.MRP | number : '1.2-2' }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Our Price:
+                                                    <i aria-hidden="true" class="fa fa-inr"></i> {{drug_list.SellingPrice | number : '1.2-2'}}</span>
+                                        </li>
+                                        <li>
+                                            <a (click)="AddtoDrugCart(drug_list)">
+                                                <span class="add-to-cart">
+                                                        <i class="material-icons add-to-cart">shopping_cart</i>
+                                                    </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="this.status === false">
+                        <div class="row">
+                            <h4 class="text-center">Drugs</h4>
+                            <div class="col-md-6" *ngFor="let item of categoryProducts.Drugs">
+                                <div class="item-brdr">
+                                    <p class="mrgn-btm">
+                                        <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+
+                                            <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                                                    <i class="flaticon-medical-11"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                                                    <i class="flaticon-medical-9"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                                                    <i class="flaticon-medical-16"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                                                    <i class="flaticon-medical-9"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                                                    <i class="flaticon-medical-11"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                                                    <i class="flaticon-tube-icon"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                                                    <i class="flaticon-tube-icon"></i>
+                                                </span>
+                                            <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                                                    <i class="flaticon-medical-8"></i>
+                                                </span> {{item.ItemName}}
+                                            <span>
+                                                    <small> - {{item.Manufacturer}}</small>
+                                                </span>
+                                        </a>
+                                    </p>
+
+                                    <p class="mrgn-lft">
+                                        <small>{{item.Composition}}</small>
+                                    </p>
+                                    <ul class="list-inline list-unstyled text-right">
+                                        <li>
+                                            <span>MRP:
+                                                    <i aria-hidden="true" class="fa fa-inr"></i> {{item.MRP | number : '1.2-2' }}</span>
+                                        </li>
+                                        <li>
+                                            <span>Our Price:
+                                                    <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                                        </li>
+                                        <li>
+                                            <a (click)="AddtoDrugCart(item)">
+                                                <span class="add-to-cart">
+                                                        <i class="material-icons add-to-cart">shopping_cart</i>
+                                                    </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="Products" class="tab-pane  col-md-12">
+                    <div class="row" *ngIf="this.status === true">
+                        <h4 class="text-center" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">Products</h4>
+                        <h6 class="text-center" *ngIf="categoryProducts.Products?.length === 0 && categoryProducts.Products !== null">No Products</h6>
+                        <div class="col-md-6" *ngFor="let item of categoryProducts.Products">
+                            <div class="item-brdr">
+
+                                <p class="mrgn-btm">
+                                    <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)">
+
+                                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                                                <i class="flaticon-medical-11"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                                                <i class="flaticon-medical-9"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                                                <i class="flaticon-medical-16"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                                                <i class="flaticon-medical-9"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                                                <i class="flaticon-medical-11"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                                                <i class="flaticon-tube-icon"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                                                <i class="flaticon-tube-icon"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                                                <i class="flaticon-medical-8"></i>
+                                            </span> {{item.Name}}
+                                        <span *ngIf="item.model !== null">- {{item.model}}</span>
+                                        <span>
+                                                <small> - {{item.VendorName}}</small>
+                                            </span>
+                                    </a>
+                                </p>
+
+                                <p class="mrgn-lft">
+                                    <small>{{item.Name}}</small>
+                                </p>
+                                <ul class="list-inline list-unstyled text-right">
+                                    <li>
+                                        <span>MRP:
+                                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.MSRP | number : '1.2-2' }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Our Price:
+                                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                                    </li>
+                                    <li>
+                                        <a (click)="AddProductToCart(item)">
+                                            <span class="add-to-cart">
+                                                    <i class="material-icons add-to-cart">shopping_cart</i>
+                                                </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="this.status === false">
+                        <h4 class="text-center" *ngIf="categoryProducts.Products?.length >0 && categoryProducts.Products !== null">Products</h4>
+                        <div class="alert alert-warning alert-dismissible text-center" role="alert" *ngIf="categoryProducts.Products?.length === 0 && categoryProducts.Products !== null">
+                            <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                            <strong>Warning!</strong> No Products Available
+                        </div>
+                        <!-- <h6 class="mt-0" *ngIf="categoryProducts.Products?.length === 0 && categoryProducts.Products !== null">No Products</h6> -->
+                        <div class="col-md-6" *ngFor="let item of categoryProducts.Products">
+                            <div class="item-brdr">
+                                <p class="mrgn-btm">
+                                    <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.Name)">
+
+                                        <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                                                <i class="flaticon-medical-11"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                                                <i class="flaticon-medical-9"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                                                <i class="flaticon-medical-16"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                                                <i class="flaticon-medical-9"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                                                <i class="flaticon-medical-11"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                                                <i class="flaticon-tube-icon"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                                                <i class="flaticon-tube-icon"></i>
+                                            </span>
+                                        <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                                                <i class="flaticon-medical-8"></i>
+                                            </span> {{item.Name}}
+                                        <span *ngIf="item.model !== null">- {{item.model}}</span>
+                                        <span>
+                                                <small> - {{item.VendorName}}</small>
+                                            </span>
+                                    </a>
+                                </p>
+
+                                <p class="mrgn-lft">
+                                    <small>{{item.Name}}</small>
+                                </p>
+                                <ul class="list-inline list-unstyled text-right">
+                                    <li>
+                                        <span>MRP:
+                                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.MSRP | number : '1.2-2' }}</span>
+                                    </li>
+                                    <li>
+                                        <span>Our Price:
+                                                <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                                    </li>
+                                    <li>
+                                        <a (click)="AddProductToCart(item)">
+                                            <span class="add-to-cart">
+                                                    <i class="material-icons add-to-cart">shopping_cart</i>
+                                                </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

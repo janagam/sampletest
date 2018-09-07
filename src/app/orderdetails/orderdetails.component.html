@@ -1,0 +1,100 @@
+<div class="container pad-top">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="panel panel-default" *ngFor="let address of  order_detailsVm.TrackOrder">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4 class="text-left"> Order Id:- {{address.Order_id}}</h4>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <button title="Reorder" type="submit" id="btnReOrder" class="button btn-primary btn-sbmt pull-right" (click)="ReOrder(order_detailsVm.TrackOrder)">
+                          <i class="fa fa-undo"></i>
+                       </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+
+                    <div class="product_details_table">
+                        <table class="table table-bordered pad-top">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Discount</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of order_detailsVm.TrackOrderItems">
+
+                                    <td>{{item.ItemName}}</td>
+                                    <td style="text-align:center;">
+                                        <i class="fa fa-inr"></i>.{{item.mrp | number:'1.2-2'}}</td>
+                                    <td style="text-align:center;">{{item.Quantity}}</td>
+                                    <td style="text-align:center;">
+                                        <i class="fa fa-inr"></i>.{{item.discount_amount | number:'1.2-2'}}</td>
+                                    <td style="text-align: center;">
+                                        <i class="fa fa-inr"></i>.{{item.subtotal | number:'1.2-2'}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="final_total_amount row">
+
+                        <div class="col-sm-7 col-xs-12 cart-final-total">
+
+                            <div class=" panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-ambulance"></i> Shipping Address
+                                </div>
+                                <div class="panel-body">
+                                    <address>
+
+                                  <br /> {{order_detailsVm.TrackShippingAddress.Title}},
+                                  <br /> {{order_detailsVm.TrackShippingAddress.Address1}},
+                                  <br /> {{order_detailsVm.TrackShippingAddress.Address2}},
+                                  <br /> {{order_detailsVm.TrackShippingAddress.City}}- {{order_detailsVm.TrackShippingAddress.Zip}},
+                                  <br /> {{order_detailsVm.TrackShippingAddress.State}},{{order_detailsVm.TrackShippingAddress.Country}}.
+                                  <br />
+                             </address>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-xs-12 payment_details_final">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="subtotal">subtotal:
+                                        <span style="float: right;">
+                <i class="fa fa-inr"></i>.{{address.Subtotal | number:'1.2-2'}}</span>
+                                    </div>
+                                    <div class="promo-discount">Promo Discount:
+                                        <span id="prmDis" style="float: right;">
+                <i class="fa fa-inr"></i>{{address.Promo_Discount | number:'1.2-2'}}</span>
+                                    </div>
+                                    <div class="shipping_cost">shipping cost:
+                                        <span id="shippingCost" style="float: right;">
+                <i class="fa fa-inr"></i>.{{address.Shipping_Cost | number:'1.2-2'}}</span>
+                                    </div>
+                                    <hr/>
+                                    <div class="final_payment">total
+                                        <span id="finalPayment" style="float: right;">
+                <i class="fa fa-inr"></i>.{{address.Total | number:'1.2-2'}} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

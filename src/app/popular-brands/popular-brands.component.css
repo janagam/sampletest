@@ -1,0 +1,28 @@
+.popular-brands .carousel {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.carousel-indicators {
+    bottom: -10px;
+}
+
+.carousel-indicators li,
+.carousel-indicators .active {
+    display: inline-block;
+    border-radius: 50%;
+    background: #ddd;
+    padding: 3px;
+    transition: .4s;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.carousel-indicators .active {
+    background: #f67f57;
+    transform: scale(1.2);
+    width: 0;
+    height: 0;
+}

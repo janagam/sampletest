@@ -1,0 +1,67 @@
+<section class="shop-header-bg hidden-xs">
+    <div class="container-fluid">
+        <nav class="navbar navbar-default custom-nav">
+            <ul class="nav navbar-nav">
+                <li class="dropdown mega-dropdown shopping-home-dropdown">
+                    <ul class="dropdown-menu mega-dropdown-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" (click)="OpenMenu()">Shop by Categories
+                                    <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                                </a>
+                        <li class="col-md-3 col-sm-5 col-xs-6 pr-pl-0">
+                            <div class="dd-mainmenu">
+                                <ul class="nav tab-menu nav-pills nav-stacked">
+
+                                    <li *ngFor="let item of category_List;let i=index">
+                                        <a title="{{item.name}}" (mouseenter)="mouseEnter(item.name,item.subCategoryVm,item.id);" (mousemove)="mousemove(item.name,item.subCategoryVm,item.id);">
+                                            <i class="flaticon-medical-21 text-right"></i>{{item.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="col-md-9 col-sm-7 col-xs-6" *ngIf="mouseOver === true">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-12">
+                                            <h3>
+                                                <a href="javascript:void(0);" (click)="GetCategoryProducts(catName,category_id)">
+                                                    {{catName}}
+                                                </a>
+                                            </h3>
+                                            <ul class="list-unstyled">
+                                                <li class="subcatories" *ngFor="let subcat of subcategory;let i=index">
+                                                    <a title="{{subcat.name}}" (click)="GetSubCategoryProducts(subcat.name,subcat.id,catName,category_id)">{{subcat.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 hidden-sm hidden-xs">
+                                            <ul class="list-unstyled list-inline">
+                                                <li>
+                                                    <img src="../../assets/img/surgical.png" class="img-responsive img-fluid"
+                                                        alt="">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="hidden-xs">
+                    <a routerLink="/Home/DlofDay"> Offers</a>
+                </li>
+                <li class="hidden-xs">
+                    <a routerLink="/Home/AllGenericMed">Generic Medicines</a>
+                </li>
+            </ul>
+            <div class="support-call hidden-xs hidden-sm">
+                <p>Need help with your booking?
+                    <span style="padding:0px 5px;">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                    </span> +91-8885916591</p>
+            </div>
+        </nav>
+    </div>
+</section>

@@ -1,0 +1,172 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/offer">Offers</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h4 class="mt-0"> Special Discount Offers</h4>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-6" *ngFor="let item of drug">
+                <div class="item-brdr" *ngIf="item !== null">
+                    <div class="thumbnail thmbnl-height" *ngIf="item.ImageName !== null && item.ImageName !== ''  && item.ItemType === 0">
+                        <div class="div-brdr">
+
+                            <img style="height: 55px;" src="http://stores.genericwala.com/Uploads/drugImageUploads/{{item.ImageName}}" class="img-responsive img-fluid center-block">
+                        </div>
+                    </div>
+                    <div class="thumbnail thmbnl-height" *ngIf="item.ImageName ===  null || item.ImageName=== '' ">
+                        <div class="div-brdr">
+                            <a href="">
+
+                                <img src="http://placehold.it/320x200" alt="">
+
+                            </a>
+                        </div>
+                    </div>
+                    <p class="mrgn-btm">
+
+                        <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+
+                            <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                            <i class="flaticon-medical-16"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                            <i class="flaticon-medical-8"></i>
+                        </span> {{item.ItemName}}
+                            <span>
+                            <small> - {{item.Manufacturer}}</small>
+                        </span>
+                        </a>
+                    </p>
+
+                    <p class="mrgn-lft">
+                        <small>{{item.Composition}}</small>
+                    </p>
+                    <ul class="list-inline list-unstyled text-right">
+                        <li>
+                            <span>MRP:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.MRP | number : '1.2-2' }}</span>
+                        </li>
+                        <li>
+                            <span>Our Price:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                        </li>
+                        <li>
+                            <a (click)="AddtoDrugCart(item,item.categoryid)">
+                                <span class="add-to-cart">
+                                <i class="material-icons add-to-cart">shopping_cart</i>
+                            </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div> -->
+        <simple-notifications></simple-notifications>
+        <div class="row carousel">
+
+            <div class="col-md-4 col-sm-6 col-xs-12 item" *ngFor="let item of drug">
+                <div class="thumb-wrapper" *ngIf="item !== null">
+                    <!-- <a class="wish-icon" data-toggle="tooltip" data-placement="left" title="Add to wish list" (click)="AddtoWhishlists(products)">
+                        <i class="glyphicon glyphicon-heart"></i>
+                    </a> -->
+
+                    <div class="img-box" *ngIf="item.ImageName !== null && item.ImageName !== ''  && item.ItemType === 0">
+                        <img src="http://stores.genericwala.com/Uploads/drugImageUploads/{{item.ImageName}}" class="img-responsive img-fluid" alt="">
+                    </div>
+                    <div class="thumb-content"></div>
+                    <p class="">
+
+                        <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+
+                            <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                            <i class="flaticon-medical-16"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                            <i class="flaticon-medical-8"></i>
+                        </span> {{item.ItemName}}
+                            <span><br/>
+                            <small>  {{item.Manufacturer}}</small>
+                        </span>
+                        </a>
+                    </p>
+                    <p class="">
+                        <small>{{item.Composition}}</small>
+                    </p>
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <span>MRP:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.MRP | number : '1.2-2' }}</span>
+                        </li>
+                        <li>
+                            <span>Our Price:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                        </li>
+
+                    </ul>
+                    <a class="btn btn-default" (click)="AddtoDrugCart(item,item.categoryid)">Add to Cart</a>
+                    <!-- <a class="btn btn-primary add-to-cart-btn" [routerLink]="['/gw-prdct-dscrptn',products.id,products.itemType]">product Details</a> -->
+                    <a class="btn btn-default" (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">product Details</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

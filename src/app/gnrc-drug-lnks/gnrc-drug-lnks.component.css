@@ -1,0 +1,7 @@
+.drug-lnk-lst {
+    list-style-type: square;
+}
+
+.drug-lnk-lst li {
+    margin: 15px;
+}

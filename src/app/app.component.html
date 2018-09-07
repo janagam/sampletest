@@ -1,0 +1,17 @@
+<app-navbar [count]="count"></app-navbar>
+
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    <app-sidebar></app-sidebar>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+       
+        <router-outlet> </router-outlet>
+  
+    </div>
+    <!-- /#page-content-wrapper -->
+    <app-chat></app-chat>
+</div>
+
+<!-- /#wrapper -->

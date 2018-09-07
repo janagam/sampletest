@@ -1,0 +1,65 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/account">Profile</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3 col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Profile Info</h4>
+                </div>
+                <div class="panel-body">
+                    <!-- <div *ngIf="isLoginError" class="alert alert-danger"> 
+                        <p>invalid username and password</p>
+                    </div> -->
+                    <form #Profile="ngForm" class="col s12 white" (ngSubmit)="submitForm(Profile)">
+                        <div class="form-group">
+                            <label for="username">First Name</label>
+                            <input type="text" class="form-control" name="firstName" id="firstName" placeholder="firstName" [(ngModel)]="profile.firstName">
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="lastName" class="form-control" name="lastName" id="lastName" [(ngModel)]="profile.lastName" placeholder="lastName">
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="middleName" class="form-control" name="middleName" id="middleName" [(ngModel)]="profile.middleName" placeholder="middleName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Mobile Number</label>
+                            <input type="lastName" class="form-control" name="mobile" id="mobile" [(ngModel)]="profile.mobile" placeholder="mobile">
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Date Of Birth</label>
+                            <input type="date" class="form-control" name="dob" id="dob" (ngModelChange)="profile.dob = $event" [ngModel]="profile.dob | date:'yyyy-MM-dd'" placeholder="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="middleName">Gender</label>
+                            <label>
+                  <input id="billing-no" type="radio" name="gender" [checked]="profile.male"  value="male"  (click)="ChangeGender($event)" />Male</label>
+                            <label><input id="billing-yes" type="radio" name="gender" [checked]="profile.female" value="female"  (click)="ChangeGender($event)" />Female</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="!Profile.form.valid" (onclick)="UpdateProfile()">Submit </button>
+                        <button type="button" class="btn btn-success"><a routerLink="/Home">Home</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

@@ -1,0 +1,52 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/about-us">List of medicines</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <h3>List of Medicines</h3>
+    <div class="row">
+
+        <div class="panel-group">
+            <div class="panel panel-default" *ngFor="let items of list_of_products;let i = index">
+                <div class="panel-heading" (click)="showContent(this,i)">
+                    <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="" aria-expanded="true">
+                        {{items.Name}} 
+                    </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" *ngIf="selectedIndex == i &&  isToggled===true">
+                    <div class="panel-body" *ngIf="items.SubCategory.length>0">
+                        <div class="col-xs-12" *ngFor="let subcat  of items.SubCategory">
+                            <h5>{{subcat.Name}}</h5>
+                            <div class="med-name">
+
+                                <div class="col-xs-12 col-md-3 m-list" *ngFor="let products  of subcat.ProductsSubCategory">
+                                    <a (click)="ProductDetails(products.ItemCode,products.itemType,products.Name)">
+                                        {{products.Name}}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

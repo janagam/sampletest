@@ -1,0 +1,115 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/AllgenericMeds">All Generic Medicines</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <h4 class="mt-0"> LIST OF ALL GENERIC MEDICINES</h4>
+            </div>
+        </div>
+        <div class="row">
+                <simple-notifications></simple-notifications>
+            <div class="col-md-6" *ngFor="let item of pagedItems">
+                <div class="item-brdr">
+
+
+                    <p class="mrgn-btm">
+                        <a (click)="ProductDetails(item.ItemCode,item.ItemType,item.ItemName)">
+
+                            <span *ngIf="item.PurchaseUnitModel === 'STRIP'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel === 'SYRUP'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'BOTTLE'">
+                            <i class="flaticon-medical-16"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'Tablet'">
+                            <i class="flaticon-medical-9"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'strip'">
+                            <i class="flaticon-medical-11"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'tube'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'TUBE'">
+                            <i class="flaticon-tube-icon"></i>
+                        </span>
+                            <span *ngIf="item.PurchaseUnitModel == 'INJ'">
+                            <i class="flaticon-medical-8"></i>
+                        </span> {{item.ItemName}}
+                            <span>
+                            <small> - {{item.Manufacturer}}</small>
+                        </span>
+                        </a>
+                    </p>
+
+                    <p class="mrgn-lft">
+                        <small>{{item.Composition}}</small>
+                    </p>
+                    <ul class="list-inline list-unstyled text-right">
+                        <li>
+                            <span>MRP:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.MRP | number : '1.2-2' }}</span>
+                        </li>
+                        <li>
+                            <span>Our Price:
+                            <i aria-hidden="true" class="fa fa-inr"></i> {{item.SellingPrice | number : '1.2-2'}}</span>
+                        </li>
+                        <li>
+                            <a (click)="AddtoDrugCart(item)">
+                                <span class="add-to-cart">
+                                <i class="material-icons add-to-cart">shopping_cart</i>
+                            </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                    <div class="pull-left">
+                            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+                                <!-- <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                <a (click)="setPage(1)">First</a>
+                            </li> -->
+                                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                                </li>
+                                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                                    <a (click)="setPage(page)">{{page}}</a>
+                                </li>
+                                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                                </li>
+                                <!-- <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                                <a (click)="setPage(pager.totalPages)">Last</a>
+                            </li> -->
+                            </ul>
+                        </div>
+
+            </div>
+        </div>
+        <hr/>
+
+    </div>
+
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

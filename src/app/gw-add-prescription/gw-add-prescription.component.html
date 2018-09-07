@@ -1,0 +1,140 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/gw-add-prescription">Add Prescription</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 gw-crt-dtls">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <h4>Add Prescription</h4>
+                        </div>
+
+                        <div class="col-xs-6 text-right" *ngIf="hidediv === true">
+                            <button class="btn btn-warning btn-bk" (click)="toggle(add)">{{buttonName}}</button>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="panel-body cstm-pnl-ht" *ngIf="isloggeIn === false && isShowiv ===false">
+                    <div class="col-md-4 col-md-offset-4">
+                        <form [formGroup]="userPrescriptionForm" (ngSubmit)="submit(userPrescriptionForm.value)" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <input type="text" formControlName="Name" class="form-control" placeholder="Name">
+                                <div *ngIf="userPrescriptionForm.controls.Name.errors &&(!userPrescriptionForm.controls.Name.pristine ||userPrescriptionForm.controls.Name.touched)"
+                                    class="error-msg">
+                                    <div [hidden]="!userPrescriptionForm.controls.Name.errors.required">Name is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="Email" class="form-control" placeholder="Email">
+                                <div *ngIf="userPrescriptionForm.controls.Email.errors &&(!userPrescriptionForm.controls.Email.pristine ||userPrescriptionForm.controls.Email.touched)"
+                                    class="error-msg">
+                                    <div [hidden]="!userPrescriptionForm.controls.Email.errors.required">Email is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="PhoneNumber" class="form-control" placeholder="Phone Number">
+                                <div *ngIf="userPrescriptionForm.controls.PhoneNumber.errors &&(!userPrescriptionForm.controls.PhoneNumber.pristine ||userPrescriptionForm.controls.PhoneNumber.touched)"
+                                    class="error-msg">
+                                    <div [hidden]="!userPrescriptionForm.controls.PhoneNumber.errors.required">Phone Number is required.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" formControlName="DoctorName" class="form-control" placeholder="Doctor Name">
+                                <div *ngIf="userPrescriptionForm.controls.DoctorName.errors &&(!userPrescriptionForm.controls.DoctorName.pristine ||userPrescriptionForm.controls.DoctorName.touched)"
+                                    class="error-msg">
+                                    <div [hidden]="!userPrescriptionForm.controls.DoctorName.errors.required">Doctor Name is required.</div>
+                                </div>
+                            </div>
+                            <div formArrayName="tabletName" class="form-group">
+                                <div class="text-right col-xs-12" style="padding-right: 0; margin-bottom: 15px;">
+                                    <a class="btn btn-success pull-right" (click)="addFieldValue()">Add Medicine</a>
+                                </div>
+
+                                <div class="form-group" *ngFor="let item of userPrescriptionForm.get('tabletName').controls;let i = index ">
+                                    <div class="input-group">
+                                        <input type="text" [formControlName]="i" class="form-control" placeholder="Medicine Name">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-danger" type="button" (click)="Delete(i)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <div class="input-group">
+                                    <input id="" type="text" class="form-control" name="email" formControlName="Upload" />
+                                    <span class="input-group-addon btn btn-default btn-file">Upload
+                                        <input type="file" (change)="fileChange($event)" name="file" formControlName="Upload" />
+                                    </span>
+                                </div>
+                            </div> -->
+                            <div class="form-group">
+                                    <div class="input-group">
+                                        <input id="" type="text" class="form-control" name="email" formControlName="Upload" value="{{FileName}}">
+                                        <span class="input-group-addon btn btn-default btn-file">Upload
+                                            <input type="file" (change)="fileChange($event)" name="file" formControlName="Upload" />
+                                        </span>
+                                    </div>
+                                </div>
+                        
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="!userPrescriptionForm.valid">Submit</button>
+                                <button type="submit" class="btn btn-success" [disabled]="!userPrescriptionForm.valid">Next</button>
+
+                                <div *ngIf="message" class="alert alert-success box-msg" role="alert">
+                                    <strong></strong> {{message}}
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div *ngIf="isloggeIn === true && isShowiv ===true">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Prescription Name</th>
+                                <th>Doctor Name</th>
+                                <th>Date Of Prescription</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of prescription_list">
+                                <td>{{item.PrescriptionName}}</td>
+                                <td>{{item.DoctorName}}</td>
+                                <td>{{item.DateOfPrescription | date:'yyyy-MM-dd'}}</td>
+                                <td>{{item.fileName}}</td>
+                                <td>{{item.DateOfPrescription | date:'yyyy-MM-dd'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

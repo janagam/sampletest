@@ -1,0 +1,116 @@
+<div *ngIf="!username && showdiv === true" class="col-lg-6" id="wplc_hovercard">
+  <form name="userInputForm" (submit)="saveUsername()">
+    <div class="form-group">
+      <label class="control-label">
+        <h4>Enter Username</h4>
+      </label>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-user"></i>
+        </span>
+        <input [(ngModel)]="userInput" name="userInput" type="text" class="form-control" autocomplete="off">
+        <span class="input-group-btn">
+          <button [disabled]="!userInput" class="btn btn-default" type="submit">Enter</button>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- <div data-reactroot="" class="widget-container body-font Brandon">
+  <div style="position: fixed; left: -10000px; visibility: hidden;">
+    <span style="font-weight: 400;"></span>
+    <span style="font-weight: 500;"></span>
+    <span style="font-weight: 600;"></span>
+  </div>
+  <div class="_2ngXYtlcHXA-EjBwuz_RKI">
+    <span class="_3KIigMno8L7h1L-RI5I_KX" style="width: 100%;"></span>
+    <button class="_2So8ItJQ9P6IqaCUlCO-2f flex-center CHAT _3S6qOFxcrgO0yM2f9_l6JZ _364Vk0R65B1GXViJwyA9fM" aria-label="Begin an instant message conversation"
+      style="background-color: rgb(114, 164, 223); fill: rgb(255, 255, 255);">
+      <i class="_1ZSagdd_Wbj_ZKw0RkZfOn">
+        <svg width="25" height="23" viewBox="0 0 25 23" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24.516 9.953C24.516 4.453 19.04 0 12.258 0 5.476 0 0 4.452 0 9.953c0 3.318 1.986 6.24 5.05 8.053-.34 2.552-1.815 4.055-1.844 4.084-.14.14-.17.368-.113.567a.524.524 0 0 0 .482.312c2.95 0 5.335-1.93 6.612-3.206.652.086 1.362.142 2.07.142 6.783 0 12.26-4.452 12.26-9.953z"
+            fill="#FFF" fill-rule="evenodd"></path>
+        </svg>
+      </i>
+    </button>
+  </div>
+</div> -->
+
+
+<div class="btn-chat" id="livechat-compact-container" style="visibility: visible; opacity: 1;">
+  <div class="btn-holder">
+    <a (click)="openpopup()" class="link">Live Chat</a>
+  </div>
+</div>
+
+<!-- <button class="_2So8ItJQ9P6IqaCUlCO-2f flex-center CHAT _3S6qOFxcrgO0yM2f9_l6JZ _364Vk0R65B1GXViJwyA9fM" aria-label="Begin an instant message conversation"
+  style="background-color: rgb(114, 164, 223); fill: rgb(255, 255, 255);">
+  <i class="_1ZSagdd_Wbj_ZKw0RkZfOn">
+    <svg width="25" height="23" viewBox="0 0 25 23" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24.516 9.953C24.516 4.453 19.04 0 12.258 0 5.476 0 0 4.452 0 9.953c0 3.318 1.986 6.24 5.05 8.053-.34 2.552-1.815 4.055-1.844 4.084-.14.14-.17.368-.113.567a.524.524 0 0 0 .482.312c2.95 0 5.335-1.93 6.612-3.206.652.086 1.362.142 2.07.142 6.783 0 12.26-4.452 12.26-9.953z"
+        fill="#FFF" fill-rule="evenodd"></path>
+    </svg>
+  </i>
+</button> -->
+
+
+
+<div *ngIf="username && showdiv === true"  id="wp_live_chat" style="margin-bottom: 0px; right: 20px; bottom: 0px; display: block;">
+  <div class="well">
+    <div class="panel panel-default">
+      <!-- Default panel contents -->
+      <div class="panel-heading">
+        Chat Now
+      </div>
+    </div>
+
+    <p *ngFor="let message of messages">
+      <strong>
+        <span class="glyphicon glyphicon-user"></span> {{ message.username }}</strong> {{message.text}}
+    </p>
+ 
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="well bs-component">
+        <form class="form-horizontal" (submit)="sendMessage()">
+          <fieldset>
+            <legend>Message</legend>
+            <div class="form-group">
+              <label for="message" class="col-lg-2 control-label">
+                <span class="glyphicon glyphicon-comment"></span>
+              </label>
+              <div class="col-lg-10">
+                <input [(ngModel)]="message" name="message" placeholder="enter message here" class="form-control" autocomplete="off" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <button [disabled]="!message" type="submit" class="btn btn-lg btn-info">Send</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <!-- <div class="col-lg-6">
+      <div class="well bs-component">
+        <form class="form-horizontal" (submit)="sendMessage()">
+          <fieldset>
+            <legend>Users Online</legend>
+            <div class="form-group">
+              <label for="message" class="col-lg-2 control-label">
+                <span class="glyphicon glyphicon-user"></span>
+              </label>
+              <div class="col-lg-10">
+                <select multiple="" class="form-control">
+                  <option *ngFor="let client of users">{{ client.username }}</option>
+                </select>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div> -->
+  </div>
+  </div>
+</div>

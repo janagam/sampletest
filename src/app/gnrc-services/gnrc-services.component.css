@@ -1,0 +1,31 @@
+.srvc-hvr a,
+.srvc-hvr a p {
+    color: #747d89;
+}
+
+.srvc-hvr:hover {
+    /* background-color: #828282; */
+    color: #ddd;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.i-rounded {
+    width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    border: 1px solid #e1e7ec;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    background-color: #fff;
+}
+
+.i-rounded a i {
+    margin-top: 25px;
+    color: #e1e7ec;
+}
+
+.i-rounded a i:hover {
+    color: #d4d4d4;
+}

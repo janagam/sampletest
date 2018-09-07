@@ -1,0 +1,459 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+
+        <div class="mrgn-xs-lft">
+            <a href="#menu-toggle" id="menu-toggle" title="menu">
+                <i class="material-icons menu hidden-sm hidden-md hidden-lg">menu</i>
+            </a>
+
+            <a class="" href="#">
+                <img class="g-logo img-responsive" src="../../assets/img/logo.png" alt="Genericwala Logo">
+            </a>
+        </div>
+        <div class="xs-li-itms">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="hidden-xs"><a routerLink="/Home/DlofDay">Offers</a></li>
+                <li class="hidden-xs"><a routerLink="/Home/AllGenericMed">Generic Medicines</a></li>
+                <li class="dropdown mega-dropdown shopping-home-dropdown hidden-xs">
+                    <a class="dropdown-toggle" data-toggle="dropdown" (click)="OpenMenu()">Shop by Categories <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+                          </a>
+
+
+                    <ul class="dropdown-menu mega-dropdown-menu">
+                        <li class="col-lg-3 col-md-4 col-sm-5 col-xs-6 pr-pl-0">
+                            <div class="dd-mainmenu">
+                                <ul class="nav tab-menu nav-pills nav-stacked">
+
+                                    <li *ngFor="let item of category_List;let i=index" [class.active]=" selectedindex === i">
+                                        <a title="{{item.name}}" (mouseenter)="mouseEnter(item.name,item.subCategoryVm,item.id,i);" (mousemove)="mousemove(item.name,item.subCategoryVm,item.id);" (mouseleave)="MouseLeave();">
+                                            {{item.name}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="col-lg-9 col-md-8 col-sm-7 col-xs-6" *ngIf="mouseOver === true">
+                            <div class="tab-content">
+                                <div class="tab-pane active">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <h3>
+                                                <a (click)="GetCategoryProducts(catName,category_id)">
+                                       
+                                        {{catName}}
+                                    </a>
+
+                                            </h3>
+                                            <ul class="list-unstyled">
+                                                <li class="subcatories" *ngFor="let subcat of subcategory;let i=index">
+                                                    <a title="{{subcat.name}}" (click)="GetSubCategoryProducts(subcat.name,subcat.id,catName,category_id)">{{subcat.name}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 hidden-sm hidden-xs">
+                                            <ul class="list-unstyled list-inline">
+                                                <li> <img src="../../assets/img/slide-one.png" class="img-responsive img-fluid" alt=""></li>
+                                                <li><button type="button" class="btn btn-primary btn-sbmt">Shop Now</button></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li><a><i class="fa fa-search fa-icons" aria-hidden="true" (click)="ShowDivBody()" ></i></a></li>
+
+                <li>
+                    <span class="cart-badge" *ngIf="info.cartvalues">{{info.cartvalues}}</span>
+                    <a routerLink="/Cart/Cart" class="" title="My cart">
+                        <i class="fa fa-shopping-cart fa-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="dropdown" *ngIf='info.isUserLoggedIn==false'>
+                    <a href="#" class="dropdown-toggle" title="My account" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" routerLink="/Login/Login">
+
+                        <i class="fa fa-user fa-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li class="dropdown" *ngIf='info.isUserLoggedIn==true'>
+                    <a href="#" class="dropdown-toggle" title="My account" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user fa-icons" aria-hidden="true"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a>
+                                <span class='username text-center'>{{_navbar.name }}</span>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a routerLink="/Account/update">
+                                <span class="pull-right">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </span> Profile</a>
+                        </li>
+                        <li>
+                            <a class="" routerLink="/WishList/WishList" title="My wishlist">
+                                <span class="pull-right">
+                                        <span class="" *ngIf="info.whishlitvalue">{{info.whishlitvalue}} Items</span>
+
+                                </span>Whishlist</a>
+                        </li>
+
+                        <li>
+                            <a routerLink="/Address/Addresses">
+                                <span class="pull-right">
+                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                </span> Address Info</a>
+                        </li>
+
+                        <li>
+                            <a>
+                                <span class="pull-right">
+                                    <i aria-hidden="true" class="fa fa-inr"> 0</i>
+                                </span> Cashback</a>
+                        </li>
+
+                        <li>
+                            <a routerLink="/Track/TrackOrders">
+                                <span class="pull-right">
+                                    <i class="fa fa-ambulance" aria-hidden="true"></i>
+                                </span>Track Order</a>
+                        </li>
+
+                        <li>
+                            <a>
+                                <span class="pull-right">
+                                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                                </span>Reward Points</a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <a [routerLink]="" (click)='Logout()'>
+                                <span class="pull-right">
+                                    <i class="fa fa-power-off" aria-hidden="true"></i>
+                                </span> Logout</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="">
+
+                    <a class="" routerLink="/gw-add-prescription">
+                        <i class="fa fa-file-text-o fa-icons" aria-hidden="true" tooltip="Upload Prescription" placement="left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--- Search Items Starts -->
+
+<div id="srch_Box_Div2" *ngIf="this.searchViewModel.length>0  && showdiv" style="display: block">
+    <div class="container-fluid">
+        <div class="row">
+            <simple-notifications></simple-notifications>
+
+            <div class="col-md-12">
+                <input type="text" class="form-control srch-bar cstm-srch" placeholder="Search for..." (keyup)="search($event)" [(ngModel)]="str">
+                <a class="btn-srch-opn srch-close" (click)="onCloseClick()">
+                    <i class="material-icons">close</i>
+                </a>
+
+            </div>
+            <div class="col-md-12">
+                <nav aria-label="Page navigation" style="padding: 10px 25px;">
+                    <ul class="pagination">
+                        <li *ngFor="let alphabets of Alphabets" id='{{str}}' [class.active]=" alphabets=== str">
+                            <a (click)="AlphabeticalSearch(alphabets)">{{alphabets}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <hr style="margin-top: 0;" />
+            <div class="col-md-4">
+
+                <div *ngIf="searchitem.Composition!==null">
+                    <h5>Compositions</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor="let term1 of Composition">
+                                <div class="pull-left" (click)="ProductDetails(term1)">
+                                    <span>{{term1.searchViewModel.Composition}} </span>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div *ngIf="this.searchitem.Generics!==null">
+                    <h5>Generics</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor="let term of this.searchitem.Generics">
+                                <div class="pull-left" (click)="ProductDetails(term)">
+                                    <span *ngIf="term.searchViewModel.FORM === 'STRIP'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM === 'PC'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM === 'SYRUP'">
+                                            <i class="flaticon-medical-9"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'BOTTLE'">
+                                            <i class="flaticon-medical-16"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'Tablet'">
+                                            <i class="flaticon-medical-9"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'strip'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'tube'">
+                                            <i class="flaticon-tube-icon"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'TUBE'">
+                                            <i class="flaticon-tube-icon"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'INJ'">
+                                            <i class="flaticon-medical-8"></i>
+                                        </span>
+                                    <span class="brnd-name">
+                                            <span>{{term.searchViewModel.BRAND}} </span>
+                                    <br/>
+                                    <span>
+                                                <small>{{term.searchViewModel.COMPANY}}</small>
+                                            </span>
+                                    </span>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <span>RS.{{term.searchViewModel.TotalPrice | number : '1.2-2'}}</span>
+                                    <br/>
+                                    <span class="pull-right" (click)="AddtoCart(term)">
+                                            <i class="material-icons add-to-cart">shopping_cart</i>
+                                        </span>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div *ngIf="this.searchitem.Productlist!==null">
+                    <h5>Products</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor=" let term of this.searchitem.Productlist">
+                                <div class="pull-left" (click)="ProductDetails(term)">
+                                    <span>
+                                            <img src="http://stores.genericwala.com/Uploads/Products/{{term.searchViewModel.PICTURE}}" class="img-srh-wdth">
+                                        </span>
+
+                                    <span class="brnd-name">
+                                            <span>{{term.searchViewModel.BRAND}} </span>
+                                    <br/>
+                                    <span>
+                                                <small>{{term.searchViewModel.COMPANY}}</small>
+                                            </span>
+                                    </span>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <span>RS.{{term.searchViewModel.TotalPrice | number : '1.2-2'}}</span>
+                                    <br/>
+                                    <span class="pull-right" (click)="AddtoCart(term)">
+                                            <i class="material-icons add-to-cart"> shopping_cart</i>
+                                        </span>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="srch_Box_Div1" *ngIf="this.searchViewModel.length>0 && searchterm.length > 2 && showdiv" style="display: block">
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- <simple-notifications></simple-notifications> -->
+            <div class="col-md-12">
+                <input type="text" class="form-control srch-bar cstm-srch" placeholder="Search for..." (keyup)="search($event)" [(ngModel)]="str">
+                <a class="btn-srch-opn srch-close" (click)="onCloseClick()">
+                    <i class="material-icons">close</i>
+                </a>
+
+            </div>
+            <div class="col-md-12">
+                <nav aria-label="Page navigation" style="padding: 10px 25px;">
+                    <ul class="pagination">
+                        <li *ngFor="let alphabets of Alphabets" [class.active]="'alphabets' === 'str'">
+                            <a (click)="AlphabeticalSearch(alphabets)=='str'">{{alphabets}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <hr style="margin-top: 0;" />
+        <div class="row">
+
+            <div class="col-md-4">
+
+
+                <div *ngIf="searchitem.Composition!==null">
+                    <h5>Compositions</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor="let term1 of Composition">
+                                <div class="pull-left" (click)="ProductDetails(term1)">
+
+                                    <span>{{term1.searchViewModel.Composition}} </span>
+                                </div>
+                            </a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div *ngIf="this.searchitem.Generics!==null">
+                    <h5>Generics</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor="let term of this.searchitem.Generics">
+                                <div class="pull-left" (click)="ProductDetails(term)">
+                                    <span *ngIf="term.searchViewModel.FORM === 'STRIP'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM === 'PC'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM === 'SYRUP'">
+                                            <i class="flaticon-medical-9"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'BOTTLE'">
+                                            <i class="flaticon-medical-16"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'Tablet'">
+                                            <i class="flaticon-medical-9"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM== 'strip'">
+                                            <i class="flaticon-medical-11"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'tube'">
+                                            <i class="flaticon-tube-icon"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'TUBE'">
+                                            <i class="flaticon-tube-icon"></i>
+                                        </span>
+                                    <span *ngIf="term.searchViewModel.FORM == 'INJ'">
+                                            <i class="flaticon-medical-8"></i>
+                                        </span>
+                                    <span class="brnd-name">
+                                            <span>{{term.searchViewModel.BRAND}} </span>
+                                    <br/>
+                                    <span>
+                                                <small>{{term.searchViewModel.COMPANY}}</small>
+                                            </span>
+                                    </span>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <span>RS.{{term.searchViewModel.TotalPrice | number : '1.2-2'}}</span>
+                                    <br/>
+                                    <span class="pull-right" (click)="AddtoCart(term)">
+                                            <i class="material-icons  add-to-cart">shopping_cart</i>
+                                        </span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div *ngIf="this.searchitem.Productlist!==null">
+
+                    <h5>Products</h5>
+                    <ul class="list-unstyled">
+                        <div class="list-group">
+                            <a class="list-group-item clearfix" *ngFor=" let term of this.searchitem.Productlist">
+                                <div class="pull-left" (click)="ProductDetails(term)">
+                                    <span>
+                                            <img src="http://stores.genericwala.com/Uploads/Products/{{term.searchViewModel.PICTURE}}" class="img-srh-wdth">
+                                        </span>
+
+                                    <span class="brnd-name">
+                                            <span>{{term.searchViewModel.BRAND}} </span>
+                                    <br/>
+                                    <span>
+                                                <small>{{term.searchViewModel.COMPANY}}</small>
+                                            </span>
+                                    </span>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <span>RS.{{term.searchViewModel.TotalPrice | number : '1.2-2'}}</span>
+                                    <br/>
+                                    <span class="pull-right" (click)="AddtoCart(term)">
+                                            <i class="material-icons add-to-cart"> shopping_cart</i>
+
+                                        </span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="srch_Box_Div" *ngIf=" this.searchViewModel.length === 0  && showdiv" style="display: block">
+
+    <div class="container-fluid">
+        <div class="row">
+            <span class="alert alert-success col-md-12" *ngIf="noresult===true">
+                <!-- <h5 class="text-center">{{Message}}</h5> -->
+                <!-- <simple-notifications></simple-notifications> -->
+            </span>
+            <!-- <span class="alert alert-danger col-md-12" *ngIf="textdanger===true">
+                <h5 class="text-center">{{Message}}</h5>
+            </span> -->
+
+
+
+            <div class="col-md-12">
+                <input type="text" class="form-control srch-bar cstm-srch" placeholder="Search for..." (keyup)="search($event)" [(ngModel)]="str">
+                <a class="btn-srch-opn srch-close" (click)="onCloseClick()">
+                    <i class="material-icons">close</i>
+                </a>
+
+            </div>
+            <div class="col-md-12">
+                <nav aria-label="Page navigation" style="padding: 10px 25px;">
+                    <ul class="pagination">
+                        <li *ngFor="let alphabets of Alphabets" [class.active]="'alphabets' === 'str'">
+                            <a (click)="AlphabeticalSearch(alphabets)=='str'">{{alphabets}}</a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <hr style="margin-top: 0;" />
+    </div>
+
+</div>

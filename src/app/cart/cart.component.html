@@ -1,0 +1,124 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/Cart/Cart">Cart</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row cstm-pnl-ht">
+        <div class="col-md-12 cart-div" *ngIf='cart_count > 0'>
+            <h4 class="col-sm-4">
+                <span class="space-tp-rt">
+                        <simple-notifications></simple-notifications>
+                    <i class="material-icons pull-left">shopping_cart</i>
+                </span> My Cart (
+                <span>{{cart_count}}</span> Items)</h4>
+            <!-- <div class="input-group col-sm-3 pull-right chck-dlvry-info">
+                <input type="text" class="form-control" placeholder="Check Delivery Info">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Go!</button>
+                </span>
+            </div> -->
+            <table class="table  table-fixed  table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th colspan="3"> Price</th>
+                    </tr>
+                    <tr>
+                        <th colspan="2" style="border:none"></th>
+                        <th>MRP</th>
+                        <th>Discount</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of cartList">
+                        <td style="position: relative;">
+                            <p>{{item.ItemName}}</p>
+                            <p class="u-save text-primary">
+                                <!-- <i class="material-icons">enhanced_encryption</i> -->
+                                <i class="fa fa-fire" aria-hidden="true"></i>You save:
+                                <span class="">
+                                    <i class="fa fa-inr" aria-hidden="true"></i> {{(item.Price-item.OriginalPrice) * item.quantity | number:'1.2-2'}}</span>
+                            </p>
+                            <span class="add-dlt-icon">
+                                <a title="Add to wishlist">
+                           
+                                    <i class="fa fa-heart-o" aria-hidden="true"  (click)="AddtoWhishlists(item)"></i>
+                                </a>
+                                <a title="Delete Item">
+                                    <i class="fa fa-trash-o" aria-hidden="true" (click)="DeleteCartItem(item)"></i>
+                                </a>
+                            </span>
+                        </td>
+                        <td>
+
+                            <div class="btn-group">
+                                <span class="btn btn-primary gw-add-btn" (click)="DecreaseQuantity(item)">-</span>
+                                <span class="btn btn-primary gw-add-btn">{{item.quantity}}</span>
+                                <span class="btn btn-primary gw-add-btn" (click)="IncreaseQuantity(item)">+</span>
+                            </div>
+
+
+                        </td>
+                        <td>
+                            <p>
+                                <i class="fa fa-inr" aria-hidden="true"></i> {{item.Price | number:'1.2-2'}}</p>
+                        </td>
+                        <td>
+                            <p>
+                                <i class="fa fa-inr" aria-hidden="true"></i> {{(item.Price-item.OriginalPrice) * item.quantity | number:'1.2-2'}}</p>
+                        </td>
+                        <td>
+                            <p>
+                                <i class="fa fa-inr" aria-hidden="true"></i> {{item.quantity * item.OriginalPrice | number:'1.2-2'}}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-sm-2 text-center value-of-prdcts">
+                <h5>Value of Products</h5>
+
+                <h4>
+                    <i class="fa fa-inr" aria-hidden="true"></i> {{cart_ActualAmount | number:'1.2-2' }}</h4>
+            </div>
+            <div class="col-sm-2 text-center value-of-prdcts">
+                <h5>Your Savings(-)</h5>
+                <h4>
+                    <i class="fa fa-inr" aria-hidden="true"></i> {{cart_DiscountAmunt | number:'1.2-2'}}</h4>
+            </div>
+            <div class="col-sm-2 text-center value-of-prdcts">
+                <h5>Final Payment</h5>
+                <h4>
+                    <i class="fa fa-inr" aria-hidden="true"></i> {{cart_TotalAmount | number:'1.2-2'}}</h4>
+            </div>
+
+            <div class="text-right">
+                <button type="button" class="btn btn-success mrgn-top-xs" routerLink="/Home">Continue Shopping</button>
+                <button type="button" class="btn btn-primary btn-sbmt mrgn-top-xs" routerLink="/Checkout">Check Out</button>
+            </div>
+
+        </div>
+        <div class="col-md-12 cart-div empty-cart text-center" *ngIf='cart_count === 0'>
+            <h4 class="empty-cart-heading">
+                <i class="material-icons">shopping_cart</i>
+                <br/> {{Message}}
+            </h4>
+        </div>
+    </div>
+
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

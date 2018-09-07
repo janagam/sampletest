@@ -1,0 +1,143 @@
+<div class="container pad-top">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 main">
+            <div class="col-md-6 col-sm-6 hidden-xs left-side">
+                <h3 class="text-center">Genericwala.com</h3>
+                <p>Generiwala.com is an online pharmacy, </p>
+                <p>we provide you quality generic medicines that are
+                    <p>produced by reputed Companies at affordable price.</p>
+            </div>
+            <!-- <div class ="alert alert-warning"*ngIf="isLoginError === true">
+                <p>{{Message}}</p>
+
+            </div> -->
+
+
+            <div class="col-md-6 col-sm-6 right-side">
+                <div *ngIf="isLoginError === true && success === false">
+
+                    <simple-notifications></simple-notifications>
+                    <!-- <strong>{{Message}}</strong> -->
+                </div>
+                <div *ngIf="isLoginError === true && success === true">
+
+                    <simple-notifications></simple-notifications>
+                    <!-- <strong>{{Message}}</strong> -->
+                </div>
+                <!-- <form #userRegistrationForm="ngForm" (ngSubmit)="submitForm(loginForm)">
+                    <div class="form-group">
+                        <input type="text" class="form-control " id="UserName" name="UserName" placeholder="Username" #UserName="ngModel" [(ngModel)]="user.UserName"
+                            required>
+                        <span *ngIf="UserName.invalid && (UserName.dirty || UserName.touched)">
+                            <span class="text-danger" *ngIf="UserName.errors.required">
+                                Name is required.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="FirstName" name="FirstName" placeholder="First Name" #FirstName="ngModel" [(ngModel)]="user.FirstName"
+                            required>
+                        <span *ngIf="FirstName.invalid && (FirstName.dirty || FirstName.touched)">
+                            <span class="text-danger" *ngIf="FirstName.errors.required">
+                                Name is required.
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="LastName" name="LastName" placeholder="Last Name" #LastName="ngModel" [(ngModel)]="user.LastName">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="Email" name="Email" placeholder="Email" #Email="ngModel" [(ngModel)]="user.Email"
+                            required email>
+                        <span *ngIf="Email.invalid && (Email.dirty || Email.touched)">
+                            <span class="text-danger" *ngIf="Email.errors.required && Email.error">
+                                Email is Required
+                            </span>
+                            <span class="text-danger" *ngIf="Email.errors.email">
+                                Email not valid.
+                            </span>
+
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="Password" name="Password" #Password="ngModel" [(ngModel)]="user.Password"
+                            placeholder="Password" required minlength="4">
+                        <span *ngIf="Password.invalid && (Password.dirty || Password.touched)">
+                            <span class="text-danger" *ngIf="Password.errors.required">
+                                Password is required.
+                            </span>
+                            <span class="text-danger" *ngIf="Password.errors.minlength">
+                                Name must be at least 8 characters long.
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="userRegistrationForm.form.invalid">Submit</button>
+                        <button type="button" class="btn btn-warning btn-bk" routerLink="/Login/Login">
+                            Login
+                        </button>
+                    </div>
+                </form> -->
+
+
+                <form [formGroup]="myForm" (ngSubmit)="submit(myForm.value)">
+                    <div class="form-group">
+                        <input type="text" formControlName="UserName" class="form-control" placeholder="UserName" (focusout)="UserName()">
+                        <simple-notifications></simple-notifications>
+                        <!-- <div *ngIf="myForm.controls.UserName.errors &&(!myForm.controls.UserName.pristine ||myForm.controls.UserName.touched)" class="text-danger">
+                            <div [hidden]="!myForm.controls.UserName.errors.required">Name is required.</div>
+                        </div> -->
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="text" formControlName="FirstName" class="form-control" placeholder="FirstName" (focusout)="FirstName()">
+                        <simple-notifications></simple-notifications>
+                        <!-- <div *ngIf="myForm.controls.FirstName.errors &&(!myForm.controls.FirstName.pristine ||myForm.controls.FirstName.touched)" class="text-danger">
+                            <div [hidden]="!myForm.controls.FirstName.errors.required">FirstName is required.</div>
+                        </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" formControlName="LastName" class="form-control" placeholder="LastName" (focusout)="LastName()">
+                        <simple-notifications></simple-notifications>
+                        <!-- <div *ngIf="myForm.controls.LastName.errors &&(!myForm.controls.LastName.pristine ||myForm.controls.LastName.touched)" class="text-danger">
+                                <div [hidden]="!myForm.controls.LastName.errors.required">LastName is required.</div>
+                            </div> -->
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" formControlName="Email" class="form-control" placeholder="Email" (focusout)="Email()">
+                        <simple-notifications></simple-notifications>
+                        <!-- <div *ngIf="myForm.controls.Email.errors &&(!myForm.controls.Email.pristine ||myForm.controls.Email.touched)" class="text-danger">
+                                <div [hidden]="!myForm.controls.Email.errors.required">Email is required.</div>
+                                <div [hidden]="!myForm.controls.Email.errors.email">Email must be a valid email address</div>
+                            </div> -->
+
+                    </div>
+                    <div class="form-group">
+                        <input type="password" formControlName="Password" class="form-control" placeholder="Password" (focusout)="Password()">
+                        <simple-notifications></simple-notifications>
+                        <!-- <div *ngIf="myForm.controls.Password.errors &&(!myForm.controls.Password.pristine ||myForm.controls.Password.touched)" class="text-danger">
+                                    <div [hidden]="!myForm.controls.Password.errors.required">Password is required.</div>
+                                    <div [hidden]="!myForm.controls.Password.errors.minlength"> minimum 6 character </div>
+                                </div> -->
+                    </div>
+                    <div class="form-group pull-right">
+                        <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="!myForm.valid">Submit</button>
+                        <button type="button" class="btn btn-warning btn-bk" routerLink="/Login/Login">
+                            Login
+                        </button>
+                        <!-- <div *ngIf="message" class="alert alert-success box-msg" role="alert">
+                            <strong></strong> {{message}}
+                        </div> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

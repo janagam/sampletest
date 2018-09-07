@@ -1,0 +1,169 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/Address/Addresses">Address Info</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <h4>Address Info</h4>
+                </div>
+                <div class="panel-body">
+                    <div id="ShippingAddress" class="tab-pane fade in active col-md-12">
+
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12">
+                                <button class="btn btn-primary btn-sbmt pull-right" (click)="toggle(add)">{{buttonName}}</button>
+                            </div>
+                            <div class="col-md-12 col-xs-12" *ngIf="UserAddress.ListAddressVm.count !== 0  && IsHidden === true">
+                                <div class="col-md-6 col-xs-12" *ngFor="let address of  UserAddress.ListAddressVm">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <span *ngIf="address.isDefault === true">
+                                            <input type="checkbox" value="{{address.AddressId}}" name="chk_Checked" checked="checked" (change)="updateCheckedOptions(chk_Checked, $event)"
+                                            />
+                                        </span>
+                                            <span *ngIf="address.isDefault === false">
+                                            <input type="checkbox" value="{{address.AddressId}}" name="chk_Checked" (change)="updateCheckedOptions(chk_Checked, $event)"
+                                            />
+                                        </span>
+                                            <div class="text-right">
+                                                <a class="add-addrs" (click)="EditAddress(address.AddressId)">
+                                                    <i class="material-icons">create</i>
+                                                </a>
+                                                <a class="dlt-addrs" (click)="DeleteAddress(address.AddressId,address.isDefault)">
+                                                    <i class="material-icons">delete</i>
+                                                </a>
+                                            </div>
+
+                                            <address>
+                                            <h5> {{address.title}}</h5>
+                                            {{address.address1}},
+                                            <br /> {{address.address2}}, {{address.city}}
+                                            <br /> {{address.country}}, {{address.stateName}}
+                                            <br /> pincode:{{address.zipcode}}
+                                        </address>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="col-md-4 col-md-offset-4 col-xs-12" #AddressForm="ngForm" (ngSubmit)="submitForm(AddressForm)" *ngIf="UserAddress.ListAddressVm.count === 0 || IsHidden === false">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Home, Ofc etc" #title="ngModel" [(ngModel)]="addressvm.title" pattern="[a-zA-Z][a-zA-Z ]+" required>
+
+                                <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                                    <div [hidden]="!title.hasError('required')">Name is required</div>
+                                    <div [hidden]="!title.hasError('pattern')">Only alphabetsallowed</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="address1" name="address1" placeholder="Address1" #address1="ngModel" [(ngModel)]="addressvm.address1" required>
+
+                                <div [hidden]="address1.valid || address1.pristine" class="alert alert-danger">
+                                    <div [hidden]="!address1.hasError('required')">address1 is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="address2" name="address2" placeholder="Address2" #address2="ngModel" [(ngModel)]="addressvm.address2" required>
+
+                                <div [hidden]="address2.valid || address2.pristine" class="alert alert-danger">
+                                    <div [hidden]="!address2.hasError('required')">address2 is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <select type="country" class="form-control" id="country" (change)="onCountryChange($event.target.value)" name="country" placeholder="Select Country" #country="ngModel" [(ngModel)]="addressvm.country" required>
+                                <option value="-1" selected="selected" disabled="disabled">Select state</option>
+                                <option value="1">India</option>
+                            </select>
+                                <div [hidden]="country.valid || country.pristine" class="alert alert-danger">
+                                    <div [hidden]="country.hasError('required')">country is required</div>
+                                </div>
+                            </div>
+                            <div *ngIf="EditAddAddress === false">
+                                <div class="form-group">
+                                    <select type="state" class="form-control" id="stateId" (change)="onstateChange($event.target.value)" name="stateId" placeholder="Select state" #state="ngModel" [(ngModel)]="addressvm.stateId" required>
+                                    <option *ngFor="let opt of statesList" [value]="opt.state_id" [selected]="opt.state1 === addressvm.stateId">{{opt.state1}}</option>
+                                </select>
+
+                                    <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                                        <div [hidden]="!state.hasError('required')">state is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <select type="city" class="form-control" id="city" name="city" #city="ngModel" [(ngModel)]="addressvm.city" placeholder="Select City" required>
+                                    <option *ngFor="let opt of citiesList " [value]="opt.city_id">{{opt.city}}</option>
+                                </select>
+                                    <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                                        <div [hidden]="!city.hasError('required')">city is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="EditAddAddress === true">
+                                <div class="form-group">
+                                    <select type="stateId" class="form-control" id="stateId" (change)="onstateChange1($event.target.value)" name="stateId" placeholder="Select state" #state="ngModel" [(ngModel)]="addressvm.stateId" required>
+                                    <option *ngFor="let opt of addressvm.statesList" [value]="opt.state_id" [selected]="opt.state1 === addressvm.stateId">{{opt.state1}}</option>
+                                </select>
+
+                                    <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                                        <div [hidden]="!state.hasError('required')">state is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select type="city" class="form-control" id="city" name="city" #city="ngModel" [(ngModel)]="addressvm.city" placeholder="Select City" required>
+                                    <option *ngFor="let opt of addressvm.citiesList " [value]="opt.city_id" [selected]="opt.city_id === addressvm.city">{{opt.city}}</option>
+                                </select>
+                                    <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                                        <div [hidden]="!city.hasError('required')">city is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Pincode" #zipcode="ngModel" [(ngModel)]="addressvm.zipcode" required maxlength="6" minlength="6">
+
+                                <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger">
+                                    <div [hidden]="!zipcode.hasError('maxlength')">zipcode should be 6 digit</div>
+                                    <div [hidden]="!zipcode.hasError('minlength')">zipcode should be 6 digit</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile Number" #Mobile="ngModel" [(ngModel)]="addressvm.Mobile" pattern="[0-9]*" required maxlength="10" minlength="10">
+                                <div [hidden]="Mobile.valid || Mobile.pristine" class="alert alert-danger">
+                                    <div [hidden]="!Mobile.hasError('minlength')">Mobile should be 10digit</div>
+                                    <div [hidden]="!Mobile.hasError('required')">Mobile is required</div>
+                                    <div [hidden]="!Mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-warning" [disabled]="!AddressForm.form.valid" (onclick)="LoginMe()">Submit</button>
+                                <button type="button" class="btn btn-warning" (click)="Cancel()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>

@@ -1,0 +1,41 @@
+<div class="container  gw-ltst-prdcts" *ngFor="let item of productList; let i = index;">
+    <div *ngIf="item.productImageCount>5">
+            <simple-notifications></simple-notifications>
+        <h2 class="text-center">{{item.name}}</h2>
+
+        <div id="myCarousel-ltst-prdcts" class="carousel slide">
+
+            <ngx-carousel [inputs]="carouselTile">
+                <ngx-tile NgxCarouselItem *ngFor="let products of item.productsVm;">
+                    <div class="item carousel-item">
+
+                        <div class="thumb-wrapper">
+
+                            <!-- <a class="wish-icon" data-placement="left" data-toggle="tooltip" title="Add to wish list" (click)="AddtoWhishlists(products)">
+                                <i class="glyphicon glyphicon-heart"></i>
+                            </a> -->
+                            <a class="wish-icon" data-toggle="tooltip" title="Add to wish list" (click)="AddtoWhishlists(products)">
+                                <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            </a>
+
+                            <div class="img-box">
+                                <img alt="" class="img-responsive img-fluid" src="http://stores.genericwala.com/Uploads/Products/{{products.picture}}">
+                            </div>
+                            <div class="thumb-content"></div>
+                            <h4>{{products.name}}</h4>
+
+                            <p class="item-price">
+                                <b>
+                                    <i aria-hidden="true" class="fa fa-inr"></i> {{products.quantityPerUnit * products.unitPrice | number:'1.2-2'}}</b>
+                            </p>
+                            <a class="btn btn-default" (click)="AddtoCart(products,item.id)">Add to Cart</a>
+                            <a class="btn btn-default" (click)="ProductDetails(products.name,products.itemType,products.id)">product Details</a>
+                        </div>
+                    </div>
+                </ngx-tile>
+                <button NgxCarouselPrev class="leftRs hidden-sm hidden-md hidden-xs"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                <button NgxCarouselNext class="rightRs hidden-sm hidden-md hidden-xs"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+            </ngx-carousel>
+        </div>
+    </div>
+</div>

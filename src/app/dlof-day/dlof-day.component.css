@@ -1,0 +1,82 @@
+.img-box {
+    height: 120px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+}
+
+.item img,
+.item img {
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 10px;
+}
+
+.thumb-wrapper {
+    border: 1px solid #e1e7ec;
+}
+
+.carousel .wish-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+    cursor: pointer;
+    font-size: 16px;
+    color: #abb0b8;
+}
+
+.carousel .item h4 {
+    font-size: 1em;
+    text-overflow: ellipsis;
+}
+
+.carousel .item h4,
+.carousel .item p,
+.carousel .item ul {
+    margin-bottom: 5px;
+}
+
+.item {
+    margin-bottom: 15px;
+}
+
+.carousel .thumb-content .btn {
+    color: #f67f57;
+    font-size: 13px;
+    text-transform: uppercase;
+    background: none;
+    border: none;
+    padding: 6px 14px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 0px;
+}
+
+.carousel .thumb-content .btn:hover,
+.carousel .thumb-content .btn:focus {
+    color: #fff;
+    background: #f67f57;
+    box-shadow: none;
+}
+
+.cart-icon i:hover,
+.wish-icon i:hover {
+    color: #f67f57;
+}
+
+.carousel .item-price {
+    font-size: 13px;
+    padding: 2px 0;
+}
+
+.carousel .item-price strike {
+    opacity: 0.7;
+    margin-right: 5px;
+}

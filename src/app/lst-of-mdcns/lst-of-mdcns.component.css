@@ -1,0 +1,35 @@
+.m-list a {
+    cursor: pointer;
+    color: #747d89;
+    font-size: 13px;
+    transition: all .5s;
+}
+
+.panel-heading {
+    color: #747d89;
+    cursor: pointer;
+}
+
+.panel-title>a:before {
+    float: right !important;
+    font-family: FontAwesome;
+    content: "\f106";
+    padding-right: 5px;
+}
+
+.panel-title>a.collapsed:before {
+    font-family: FontAwesome;
+    float: right !important;
+    content: "\f107";
+}
+
+.m-list a:hover {
+    color: #f67f57;
+}
+
+.m-list a:hover::before {
+    content: "\f101";
+    font-family: FontAwesome;
+    padding-right: 5px;
+    color: #f67f57;
+}

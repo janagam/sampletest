@@ -1,0 +1,12 @@
+.panel-default>.panel-heading {
+    color: #747d89;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+
+address,
+.payment_details_final,
+.product_details_table>.table-bordered>thead>tr>th,
+.product_details_table>.table-bordered>tbody>tr>td {
+    color: #747d89;
+}

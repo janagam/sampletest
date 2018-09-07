@@ -1,0 +1,67 @@
+.gw-ltst-prdcts hr {
+    margin-top: -16px;
+}
+
+.ngxcarouselcJIzks>.ngxcarousel>.ngxcarousel-inner>.ngxcarousel-items>.item {
+    width: auto;
+}
+
+.tile {
+    box-shadow: none !important;
+}
+
+.ngxcarouselPointDefault .ngxcarouselPoint li {
+    display: inline-block;
+    border-radius: 50%;
+    background: #ddd !important;
+    padding: 4px;
+    margin: 0 4px;
+    transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+    transition: 0.4s;
+}
+
+ngxcarouselPointDefault .ngxcarouselPoint li.active {
+    background: #f67f57;
+    transform: scale(1.8);
+}
+
+.leftRs {
+    position: absolute;
+    margin: auto;
+    top: -42px;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    left: -80px;
+    border: 1px solid #ddd;
+    color: #f67f57;
+    background: none;
+}
+
+.rightRs {
+    position: absolute;
+    margin: auto;
+    top: -42px;
+    bottom: 0;
+    width: 50px;
+    height: 50px;
+    box-shadow: 1px 2px 10px -1px rgba(0, 0, 0, .3);
+    border-radius: 999px;
+    right: -80px;
+    border: 1px solid #ddd;
+    color: #f67f57;
+    background: none;
+}
+
+.leftRs:hover,
+.rightRs:hover {
+    background-color: #f67f57;
+    color: #fff;
+}
+
+.btn-default {
+    color: #777;
+    border: 1px solid #e1e7ec;
+}

@@ -1,0 +1,17 @@
+.add-addrs i,
+.dlt-addrs i {
+    color: #ddd;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-addrs i:hover,
+.dlt-addrs i:hover {
+    color: #ec8558;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-sbmt {
+    margin-bottom: 10px;
+}

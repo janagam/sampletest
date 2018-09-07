@@ -1,0 +1,408 @@
+<section class="banner-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Home"><i class="fa fa-home" aria-hidden="true"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a routerLink="/Cart/Cart">Cart</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a routerLink="/Checkout">Check Out</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs cstm-tab">
+                        <!-- <li [class.active]="selectedtabIndex === i">
+                            <a data-toggle="tab" href="#ShippingAddress">Shipping Address</a>
+                        </li>
+                        <li [class.active]="selectedtabIndex === i">
+                            <a data-toggle="tab" href="#Prescription">Prescription</a>
+                        </li>
+                        <li [class.active]="selectedtabIndex === i">
+                            <a data-toggle="tab" href="#OrderSummary">Order Summary</a>
+                        </li>
+                        <li [class.active]="selectedtabIndex === i">
+                            <a data-toggle="tab" href="#PaymentOptions"> Payment Options</a>
+                        </li> -->
+                        <li *ngFor="let menu of tabs;let i = index" [class.active]="selectedtabIndex === i" (click)=" setTab(i)">
+                            <a data-toggle="tab" href="#{{menu}}">{{menu}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="panel-body">
+
+                    <div class="tab-content">
+                        <div id="ShippingAddress" class="tab-pane col-md-12" [class.active]="selectedtabIndex === 0">
+                            <h3 class="text-center">Address Info</h3>
+                            <div class="row">
+                                <div class="col-md-12 text-right">
+                                    <button class="btn btn-primary btn-sbmt" (click)="toggle(add)">{{buttonName}}</button>
+                                    <a type="submit" class="btn btn-success" data-toggle="tab" href="#Prescription" (click)="Next(1)">Next </a>
+                                </div>
+                                <div class="col-md-12" *ngIf="UserAddress.ListAddressVm.count !== 0  && IsHidden === true">
+                                    <div class="col-md-6" *ngFor="let address of  UserAddress.ListAddressVm">
+                                        <div class="panel panel-default">
+                                            <div class="panel-body">
+                                                <span *ngIf="address.isDefault === true">
+                                                    <input type="checkbox" value="{{address.AddressId}}" name="chk_Checked" checked="checked" (change)="updateCheckedOptions(chk_Checked, $event)"
+                                                    />
+                                                </span>
+                                                <span *ngIf="address.isDefault === false">
+                                                    <input type="checkbox" value="{{address.AddressId}}" name="chk_Checked" (change)="updateCheckedOptions(chk_Checked, $event)"
+                                                    />
+                                                </span>
+                                                <div class="text-right">
+                                                    <a class="add-addrs" (click)="EditAddress(address.AddressId)">
+                                                        <i class="material-icons">create</i>
+                                                    </a>
+                                                    <a class="dlt-addrs" (click)="DeleteAddress(address.AddressId,address.isDefault)">
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+                                                </div>
+
+                                                <address>
+                                                    <h5> {{address.title}}</h5>
+                                                    {{address.address1}},
+                                                    <br /> {{address.address2}}, {{address.city}}
+                                                    <br /> {{address.country}}, {{address.stateName}}
+                                                    <br /> pincode:{{address.zipcode}}
+                                                </address>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form class="col-md-4 col-md-offset-4" #AddressForm="ngForm" (ngSubmit)="submitForm(AddressForm)" *ngIf="UserAddress.ListAddressVm.count === 0 || IsHidden === false">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Home, Ofc etc" #title="ngModel" [(ngModel)]="addressvm.title" pattern="[a-zA-Z][a-zA-Z ]+" required>
+
+                                    <div [hidden]="title.valid || title.pristine" class="alert alert-danger">
+                                        <div [hidden]="!title.hasError('required')">Name is required</div>
+                                        <div [hidden]="!title.hasError('pattern')">Only alphabetsallowed</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="address1" name="address1" placeholder="Address1" #address1="ngModel" [(ngModel)]="addressvm.address1" required>
+
+                                    <div [hidden]="address1.valid || address1.pristine" class="alert alert-danger">
+                                        <div [hidden]="!address1.hasError('required')">address1 is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Address2" #address2="ngModel" [(ngModel)]="addressvm.address2" required>
+
+                                    <div [hidden]="address2.valid || address2.pristine" class="alert alert-danger">
+                                        <div [hidden]="!address2.hasError('required')">address2 is required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select type="country" class="form-control" id="country" (change)="onCountryChange($event.target.value)" name="country" placeholder="Select Country" #country="ngModel" [(ngModel)]="addressvm.country" required>
+                                        <option value="-1" selected="selected" disabled="disabled">Select state</option>
+                                        <option value="1">India</option>
+                                    </select>
+                                    <div [hidden]="country.valid || country.pristine" class="alert alert-danger">
+                                        <div [hidden]="country.hasError('required')">country is required</div>
+                                    </div>
+                                </div>
+                                <div *ngIf="EditAddAddress === false">
+                                    <div class="form-group">
+                                        <select type="state" class="form-control" id="stateId" (change)="onstateChange($event.target.value)" name="stateId" placeholder="Select state" #state="ngModel" [(ngModel)]="addressvm.stateId" required>
+                                            <option *ngFor="let opt of statesList" [value]="opt.state_id" [selected]="opt.state1 === addressvm.stateId">{{opt.state1}}</option>
+                                        </select>
+
+                                        <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                                            <div [hidden]="!state.hasError('required')">state is required</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select type="city" class="form-control" id="city" name="city" #city="ngModel" [(ngModel)]="addressvm.city" placeholder="Select City" required>
+                                            <option *ngFor="let opt of citiesList " [value]="opt.city_id">{{opt.city}}</option>
+                                        </select>
+                                        <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                                            <div [hidden]="!city.hasError('required')">city is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="EditAddAddress === true">
+                                    <div class="form-group">
+                                        <select type="stateId" class="form-control" id="stateId" (change)="onstateChange1($event.target.value)" name="stateId" placeholder="Select state" #state="ngModel" [(ngModel)]="addressvm.stateId" required>
+                                            <option *ngFor="let opt of addressvm.statesList" [value]="opt.state_id" [selected]="opt.state1 === addressvm.stateId">{{opt.state1}}</option>
+                                        </select>
+
+                                        <div [hidden]="state.valid || state.pristine" class="alert alert-danger">
+                                            <div [hidden]="!state.hasError('required')">state is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <select type="city" class="form-control" id="city" name="city" #city="ngModel" [(ngModel)]="addressvm.city" placeholder="Select City" required>
+                                            <option *ngFor="let opt of addressvm.citiesList " [value]="opt.city_id" [selected]="opt.city_id === addressvm.city">{{opt.city}}</option>
+                                        </select>
+                                        <div [hidden]="city.valid || city.pristine" class="alert alert-danger">
+                                            <div [hidden]="!city.hasError('required')">city is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Pincode" #zipcode="ngModel" [(ngModel)]="addressvm.zipcode" required maxlength="6" minlength="6">
+
+                                    <div [hidden]="zipcode.valid || zipcode.pristine" class="alert alert-danger">
+                                        <div [hidden]="!zipcode.hasError('maxlength')">zipcode should be 6 digit</div>
+                                        <div [hidden]="!zipcode.hasError('minlength')">zipcode should be 6 digit</div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Mobile" name="Mobile" placeholder="Mobile Number" #Mobile="ngModel" [(ngModel)]="addressvm.Mobile" pattern="[0-9]*" required maxlength="10" minlength="10">
+                                    <div [hidden]="Mobile.valid || Mobile.pristine" class="alert alert-danger">
+                                        <div [hidden]="!Mobile.hasError('minlength')">Mobile should be 10digit</div>
+                                        <div [hidden]="!Mobile.hasError('required')">Mobile is required</div>
+                                        <div [hidden]="!Mobile.hasError('pattern')">Mobile numberr should be only numbers</div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success" [disabled]="!AddressForm.form.valid" (onclick)="LoginMe()">Submit</button>
+                                    <button type="button" class="btn btn-primary btn-sbmt" (click)="Cancel()">Cancel</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div id="Prescription" class="tab-pane col-md-4 col-md-offset-4" [class.active]="selectedtabIndex === 1">
+                            <h3 class="text-center">Add Prescription</h3>
+                            <form [formGroup]="userPrescriptionForm" (ngSubmit)="submit(userPrescriptionForm.value)" enctype="multipart/form-data">
+
+                                <div class="form-group">
+                                    <input type="text" formControlName="Name" class="form-control" placeholder="Name">
+                                    <div *ngIf="userPrescriptionForm.controls.Name.errors &&(!userPrescriptionForm.controls.Name.pristine ||userPrescriptionForm.controls.Name.touched)" class="error-msg">
+                                        <div [hidden]="!userPrescriptionForm.controls.Name.errors.required">Name is required.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="Email" class="form-control" placeholder="Email">
+                                    <div *ngIf="userPrescriptionForm.controls.Email.errors &&(!userPrescriptionForm.controls.Email.pristine ||userPrescriptionForm.controls.Email.touched)" class="error-msg">
+                                        <div [hidden]="!userPrescriptionForm.controls.Email.errors.required">Email is required.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="PhoneNumber" class="form-control" placeholder="Phone Number">
+                                    <div *ngIf="userPrescriptionForm.controls.PhoneNumber.errors &&(!userPrescriptionForm.controls.PhoneNumber.pristine ||userPrescriptionForm.controls.PhoneNumber.touched)" class="error-msg">
+                                        <div [hidden]="!userPrescriptionForm.controls.PhoneNumber.errors.required">Phone Number is required.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="DoctorName" class="form-control" placeholder="Doctor Name">
+                                    <div *ngIf="userPrescriptionForm.controls.DoctorName.errors &&(!userPrescriptionForm.controls.DoctorName.pristine ||userPrescriptionForm.controls.DoctorName.touched)" class="error-msg">
+                                        <div [hidden]="!userPrescriptionForm.controls.DoctorName.errors.required">Doctor Name is required.</div>
+                                    </div>
+                                </div>
+                                <div formArrayName="tabletName" class="form-group">
+                                    <div class="text-right col-xs-12" style="padding-right: 0; margin-bottom: 15px;">
+                                        <a class="btn btn-success pull-right" (click)="addFieldValue()">Add Medicine</a>
+                                    </div>
+
+                                    <div class="form-group" *ngFor="let item of userPrescriptionForm.get('tabletName').controls;let i = index ">
+                                        <div class="input-group">
+                                            <input type="text" [formControlName]="i" class="form-control" placeholder="Medicine Name">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-danger" type="button" (click)="Delete(i)">
+                                                    <span class="glyphicon glyphicon-trash"></span>
+                                            </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input id="" type="text" class="form-control" name="email" formControlName="Upload" value="{{FileName}}">
+                                        <span class="input-group-addon btn btn-default btn-file">Upload
+                                            <input type="file" (change)="fileChange($event)" name="file" formControlName="Upload" />
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <a type="submit" class="btn btn-primary btn-sbmt" data-toggle="tab" href="#ShippingAddress" (click)="Prev(0)"> Previous</a>
+                                    <button type="submit" class="btn btn-primary btn-sbmt" [disabled]="!userPrescriptionForm.valid">Submit</button>
+                                    <a type="submit" class="btn btn-success" data-toggle="tab" href="#OrderSummary" (click)="Next(2)">Next </a>
+                                    <div *ngIf="message" class="alert alert-success box-msg" role="alert">
+                                        <strong></strong> {{message}}
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div id="OrderSummary" class="tab-pane col-md-12" [class.active]="selectedtabIndex === 2">
+                            <h3 class="text-center">Products in your Order</h3>
+                            <table class="table table-bordered table-condensed">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th>MRP</th>
+                                        <th>Discopunt</th>
+                                        <th>Price</th>
+                                        <th>Quantity </th>
+                                        <th>Sub Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let item of cartList">
+                                        <td>{{item.ItemName}}</td>
+                                        <td>{{item.Price}}</td>
+                                        <td>{{(item.Price-item.OriginalPrice) | number:'1.2-2'}}</td>
+                                        <td> {{item.OriginalPrice | number:'1.2-2'}}</td>
+                                        <td>{{item.quantity}} </td>
+                                        <td>{{item.quantity * item.OriginalPrice | number:'1.2-2'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-danger">
+                                <a class="" data-toggle="tab" href="#Prescription">Upload Prescription for this item mandatory*</a>
+                            </p>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-primary btn-sbmt" (click)="GoCart()">Change Order Items</button>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sbmt" data-toggle="tab" href="#Prescription" (click)="Prev(1)"> Previous</button>
+                            <a type="submit" class="btn btn-success" data-toggle="tab" href="#PaymentOptions" (click)="Next(3)">Next </a>
+
+
+                        </div>
+                        <div id="PaymentOptions" class="tab-pane col-md-12" [class.active]="selectedtabIndex === 3">
+                            <h3 class="text-center">Payment Options</h3>
+                            <div class="col-md-6 col-md-offset-3 pad-top">
+                                <form class="form-horizontal" action="" method="">
+
+                                    <div class="form-group">
+                                        <label class="col-md-4" style="padding-top: 6px;">Promotional Coupon</label>
+                                        <div class="col-md-5">
+                                            <input type="text" class="form-control" placeholder="Enter Promotional Code" name="PromoValue" [(ngModel)]="PromoValue">
+                                            <span class="alert-danger">{{promoMessage}}</span>
+                                        </div>
+
+                                        <button *ngIf="PromoValue===''||PromoValue===null" type="button" class="btn btn-success col-md-2 mrgn-top-xs" (click)='ApplyPromo(paymentType,PromoValue)'>Apply</button>
+                                    </div>
+
+
+                                    <div class="form-group" *ngFor="let promos of activePromos.activePromosVM">
+
+                                        <label class="radio">
+                                            <input type="radio" value="{{promos.promo_Code}}" id="rbPromo" [(ngModel)]="PromoChecked" name="Promos" class="Promos" (click)="ApplyPromoCode(paymentType,$event,promos.promo_Code)">{{promos.promo_Code}}
+                                            <span class="checkround"></span>
+                                        </label>
+
+                                        <p>
+                                            {{promoMessage}}
+                                        </p>
+
+                                        <span class="label label-danger">Terms & Conditions</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="checkbox-inline radio">
+                                            <input type="radio" id="rbOnline" name="delivery" class="raddelvr" checked="checked" value="ONLINE" (click)="PaymentType($event)">Online Banking
+                                            <span class="checkround"></span>
+                                        </label>
+
+                                        <label class="checkbox-inline radio">
+                                            <input type="radio" id="rbCOD" name="delivery" class="raddelvr" value="COD" (click)="PaymentType($event)">Cash on delivery
+                                            <span class="checkround"></span>
+                                        </label>
+                                    </div>
+                                    <div *ngIf="show_PaymentDiv === true">
+                                        <div class="form-group">
+                                            <label class="checkbox-inline radio">
+                                                <input type="radio" value="RAZORPAY" id="rbzPay" class="radPaytm" name="onlinepayment" checked="checked" (click)="SubPaymentType($event)">Razarpay
+                                                <span class="checkround"></span>
+                                            </label>
+                                            <label class="checkbox-inline radio">
+                                                <input type="radio" value="PAYTM" id="rbPaytm" name="onlinepayment" class="radPaytm" (click)="SubPaymentType($event)">Paytm
+                                                <span class="checkround"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Subtotal:
+                                                </td>
+                                                <td>{{cart_TotalAmount | number:'1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Promo Discount:
+                                                </td>
+                                                <td>{{promoDiscount | number:'1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Shipping Cost:
+                                                    <p>(Upto 500g)</p>
+                                                </td>
+                                                <td>{{shipCost}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    COD Charges:
+                                                </td>
+                                                <td>{{codeCharge}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Total
+                                                </td>
+                                                <td>{{Total | number:'1.2-2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="form-group">
+                                        <label class="checkbox-inline radio">
+                                            <input type="radio" name="chk_Confirm" [checked]="confirmchecked" (change)="ConfirmCheckedOptions(isPrescriptionRequired, $event)">I Agree To Terms And Conditions
+                                            <span class="checkround"></span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group text-center" *ngIf="isPrescriptionRequired === true">
+                                        <button [disabled]="isPrescriptionRequired" class="btn btn-success" (click)="OrderConfirm(shipCost,codeCharge,paymentType,promoDiscount,subPaymentType,PromoValue)">Confirm</button>
+                                    </div>
+<!-- 
+                                    <div class="form-group text-center" *ngIf="UserAddress.ListAddressVm.count==0 || UserAddress.ListAddressVm.count==0>
+                                        <button [disabled]="isPrescriptionRequired" class="btn btn-success" (click)="OrderConfirm(shipCost,codeCharge,paymentType,promoDiscount,subPaymentType,PromoValue)">Confirm</button>
+                                    </div> -->
+                                    <div class="form-group text-center" *ngIf="isPrescriptionRequired === false">
+                                        <button [disabled]="!confirmchecked" class="btn btn-success" (click)="OrderConfirm(shipCost,codeCharge,paymentType,promoDiscount,subPaymentType,PromoValue)">Confirm</button>
+                                        <a type="submit" class="btn btn-primary btn-sbmt" data-toggle="tab" href="#OrderSummary" (click)="Prev(2)"> Previous</a>
+                                    </div>
+                                    <div class="alert alert-danger alert-dismissible fade in" *ngIf="uploadPrescription === false && isAlertboxshow === true">
+                                        <strong>{{uploadPrescriptionMessage}}</strong>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<app-popular-brands></app-popular-brands>
+<app-footer></app-footer>
